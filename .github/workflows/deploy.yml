@@ -19,7 +19,7 @@ jobs:
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: arn:aws:iam::622473043539:role/BucketScanDeployRole
+          role-to-assume: arn:aws:iam::622473043539:role/DeployRole-bucketscan
           role-session-name: DeployFromBucketScanRepo
           aws-region: eu-west-2
 
