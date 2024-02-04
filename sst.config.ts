@@ -9,6 +9,6 @@ export default {
     };
   },
   stacks(app) {
-    app.stack(Default);
+    app.stack(Default); ``
   }
 } satisfies SSTConfig;
