@@ -14,7 +14,9 @@ build:
 	(cd packages/core; yarn install && yarn build)
 	(cd packages/functions; yarn install && yarn build)
 	(cd packages/web; yarn install && yarn build)
-	(cd sst; yarn install && yarn build)
+
+# Temporarily removing SST from the build as it's not yet working
+# (cd sst; yarn install && yarn build)
 
 .PHONY: run
 run:
