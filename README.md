@@ -1,5 +1,6 @@
-# BucketScan
+[![Deploy](https://github.com/bucketscan/bucketscan/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/bucketscan/bucketscan/actions/workflows/deploy.yml)
 
+# BucketScan
 
 ## Running
 `npx pnpm install && npm run dev` on the root
