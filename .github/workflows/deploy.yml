@@ -16,6 +16,10 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
+      - name: Build
+        shell: bash
+        run: make build
+
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
