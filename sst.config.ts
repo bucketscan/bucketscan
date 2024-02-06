@@ -1,14 +1,14 @@
-import { SSTConfig } from "sst";
-import { Default } from "./stacks/Default";
+import { SSTConfig } from "sst"
+import { Default } from "./stacks/Default"
 
 export default {
   config(_input) {
     return {
       name: "bucketscan",
       region: "us-east-1",
-    };
+    }
   },
   stacks(app) {
-    app.stack(Default); ``
+    app.stack(Default)
   }
-} satisfies SSTConfig;
+} satisfies SSTConfig
