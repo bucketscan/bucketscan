@@ -2,6 +2,7 @@
 
 import React from "react";
 import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarMenuToggle, NavbarMenuItem, NavbarMenu} from "@nextui-org/react";
+import { BasejumpUserSession, SignedIn, SignedOut } from "@usebasejump/next";
 
 export default function Menu() {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -26,9 +27,11 @@ export default function Menu() {
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
-        <NavbarBrand>
-          <p className="font-bold text-inherit">BucketScan</p>
-        </NavbarBrand>
+        <Link href="/">
+          <NavbarBrand>
+            <p className="font-bold text-inherit">BucketScan</p>
+          </NavbarBrand>
+        </Link>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
@@ -50,12 +53,19 @@ export default function Menu() {
       </NavbarContent>
       <NavbarContent justify="end">
         <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="primary" href="/signup" variant="flat">
-            Sign Up
-          </Button>
+          <BasejumpUserSession>
+            <SignedIn>
+              <p>Hello X,</p>
+              <form action="/auth/signout" method="post">
+                <Button className="button block" type="submit">
+                  Sign out
+                </Button>
+              </form>
+            </SignedIn>
+            <SignedOut>
+              <Link href="/login">Login</Link>
+            </SignedOut>
+          </BasejumpUserSession>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>

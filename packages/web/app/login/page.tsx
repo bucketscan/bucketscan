@@ -5,18 +5,10 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
 import { useUser } from '@supabase/auth-helpers-react';
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
-import { redirect } from 'next/navigation';
-import { useEffect } from 'react';
 
-export default function SignUp() {
+export default function Page() {
   const user = useUser();
   const supabase = createClientComponentClient()
-
-  useEffect(() => {
-    if (user) {
-      redirect('/dashboard');
-    }
-  }, [user]);
 
   if (!user)
     return (
@@ -27,7 +19,7 @@ export default function SignUp() {
           <div className="flex flex-col space-y-4 h-full">
             <Auth
               supabaseClient={supabase}
-              view="sign_up"
+              view="sign_in"
               providers={['google', 'github']}
               redirectTo={`${getURL()}auth/callback`}
               magicLink={true}
