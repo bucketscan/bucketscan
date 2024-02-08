@@ -27,5 +27,4 @@ jobs:
           role-session-name: DeployFromBucketScanRepo
           aws-region: eu-west-2
 
-      - run: aws s3 mb s3://slade-test
-      - run: aws s3 rb s3://slade-test
+      - run: npx pnpm run deploy --stage prod

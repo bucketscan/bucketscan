@@ -10,7 +10,12 @@ clean:
 		**/node_modules/
 
 .PHONY: build
-build: npx pnpm install -r && npx pnpm build
+build:
+	npx pnpm build
+
+.PHONY: install
+install:
+	npx pnpm install -r
 
 # Temporarily removing SST from the build as it's not yet working
 # (cd sst; yarn install && yarn build)
@@ -28,7 +33,7 @@ web:
 # Combined commands
 ###################################################################
 .PHONY: setup
-setup: build run
+setup: install build run
 
 .PHONY: teardown
 teardown: clean
