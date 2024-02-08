@@ -10,17 +10,19 @@ clean:
 		**/node_modules/
 
 .PHONY: build
-build:
-	(cd packages/core; yarn install && yarn build)
-	(cd packages/functions; yarn install && yarn build)
-	(cd packages/web; yarn install && yarn build)
+build: npx pnpm install -r && npx pnpm build
 
 # Temporarily removing SST from the build as it's not yet working
 # (cd sst; yarn install && yarn build)
 
 .PHONY: run
 run:
-	cd packages/web; yarn dev
+	npx pnpm dev
+
+.PHONY: web
+web:
+	npx pnpm --filter web run dev:local
+
 
 ###################################################################
 # Combined commands

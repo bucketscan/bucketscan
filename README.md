@@ -27,3 +27,10 @@ To clean up all build outputs, run the following command in the terminal:
 ```shell
 $ make teardown
 ```
+
+## Running Locally
+To run the entire app run:
+`make run`
+
+To run just the web app run:
+`make web`
