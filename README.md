@@ -34,3 +34,24 @@ To run the entire app run:
 
 To run just the web app run:
 `make web`
+
+## Working with Supabase
+To develop locally, you can use the `supabase` CLI to start a local instance of the Supabase database. To do this, run the following command:
+
+```shell
+npx supabase login
+```
+
+After logging in:
+```
+cd packages/web && npx supabase link --project-ref ydtwazcntqtdfhorddrm
+```
+
+Then run in the :
+```
+npx supabase pull && npx supabase start
+```
+
+This will create a local instance of the Supabase database in Docker.
+
+To create migrations please see this [documentation](https://supabase.com/docs/guides/cli/local-development#database-migrations)
