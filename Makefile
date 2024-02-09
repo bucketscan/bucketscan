@@ -9,16 +9,13 @@ clean:
 		node_modules/ \
 		**/node_modules/
 
-.PHONY: build
-build:
-	npx pnpm build
-
 .PHONY: install
 install:
 	npx pnpm install -r
 
-# Temporarily removing SST from the build as it's not yet working
-# (cd sst; yarn install && yarn build)
+.PHONY: build
+build:
+	npx pnpm build
 
 .PHONY: run
 run:
@@ -28,6 +25,13 @@ run:
 web:
 	npx pnpm --filter web run dev:local
 
+.PHONY: supabase-init
+supabase-init:
+	npx supabase login
+	(cd packages/web; npx supabase link --project-ref ydtwazcntqtdfhorddrm && npx supabase db pull)
+
+.PHONY: supabase-start
+	npx supabase start
 
 ###################################################################
 # Combined commands

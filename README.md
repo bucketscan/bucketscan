@@ -10,7 +10,10 @@ The following tools are required to build and run this project.
 
 1. [Node.js](https://nodejs.org/en/download)
 1. An IDE such as [VSCode](https://code.visualstudio.com/download)
+1. [Docker](https://docs.docker.com/desktop)
 1. _Recommended_ [AWS Vault](https://github.com/99designs/aws-vault?tab=readme-ov-file#installing)
+
+> Note that when running any of the build commands, you must be running with valid AWS credentials in an account bootstrapped for CDK and SST.
 
 ## Build and run the project
 
@@ -29,27 +32,29 @@ $ make teardown
 ```
 
 ## Running Locally
+
 To run the entire app run:
-`make run`
+
+```shell
+$ make run
+```
 
 To run just the web app run:
-`make web`
+
+```shell
+$ make web
+```
 
 ## Working with Supabase
+
 To develop locally, you can use the `supabase` CLI to start a local instance of the Supabase database. To do this, run the following command:
 
 ```shell
-npx supabase login
-```
+# Initialize the local database
+$ make supabase-init
 
-After logging in:
-```
-cd packages/web && npx supabase link --project-ref ydtwazcntqtdfhorddrm
-```
-
-Then run in the :
-```
-npx supabase pull && npx supabase start
+# Start the instance in Docker
+$ make supabase-start
 ```
 
 This will create a local instance of the Supabase database in Docker.
