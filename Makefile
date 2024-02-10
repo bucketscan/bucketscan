@@ -33,6 +33,10 @@ supabase-init:
 .PHONY: supabase-start
 	npx supabase start
 
+.PHONY: destroy
+destroy:
+	npx pnpm remove
+
 ###################################################################
 # Combined commands
 ###################################################################
@@ -40,4 +44,4 @@ supabase-init:
 setup: install build run
 
 .PHONY: teardown
-teardown: clean
+teardown: destroy clean
