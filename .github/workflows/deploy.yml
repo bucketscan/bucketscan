@@ -12,6 +12,9 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v4
@@ -42,10 +45,6 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install -r
-
-      - name: Build
-        shell: bash
-        run: make build
 
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v3
