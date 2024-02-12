@@ -59,4 +59,15 @@ $ make supabase-start
 
 This will create a local instance of the Supabase database in Docker.
 
+To create a new migration run
+```
+$ cd packages/web // change into the web package
+$ npx supabase migration new <NAME>
+```
+
+Afterward, create your migration in a transaction. When happy, you can apply it to the local DB with
+```npx supabase migration up```
+
+Finally, when you're ready to push that change to prod, run `npx supabase db push`
+
 To create migrations please see this [documentation](https://supabase.com/docs/guides/cli/local-development#database-migrations)
