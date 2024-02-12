@@ -9,7 +9,83 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      files: {
+        Row: {
+          accountid: string
+          createdon: string
+          filesize: number
+          id: string
+          name: string
+          status: Database["public"]["Enums"]["file_status"]
+        }
+        Insert: {
+          accountid: string
+          createdon?: string
+          filesize: number
+          id?: string
+          name: string
+          status: Database["public"]["Enums"]["file_status"]
+        }
+        Update: {
+          accountid?: string
+          createdon?: string
+          filesize?: number
+          id?: string
+          name?: string
+          status?: Database["public"]["Enums"]["file_status"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_files_accountid"
+            columns: ["accountid"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      scans: {
+        Row: {
+          accountid: string
+          createdon: string
+          fileid: string
+          id: string
+          result: Database["public"]["Enums"]["scan_status"]
+          status: Database["public"]["Enums"]["scan_status"]
+        }
+        Insert: {
+          accountid: string
+          createdon?: string
+          fileid: string
+          id?: string
+          result: Database["public"]["Enums"]["scan_status"]
+          status?: Database["public"]["Enums"]["scan_status"]
+        }
+        Update: {
+          accountid?: string
+          createdon?: string
+          fileid?: string
+          id?: string
+          result?: Database["public"]["Enums"]["scan_status"]
+          status?: Database["public"]["Enums"]["scan_status"]
+        }
+        Relationships: [
+          {
+            foreignKeyName: "fk_scans_accountid"
+            columns: ["accountid"]
+            isOneToOne: false
+            referencedRelation: "accounts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "fk_scans_fileid"
+            columns: ["fileid"]
+            isOneToOne: false
+            referencedRelation: "files"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -138,7 +214,8 @@ export type Database = {
       }
     }
     Enums: {
-      [_ in never]: never
+      file_status: "clean" | "infected" | "error"
+      scan_status: "pending" | "in_progress" | "complete" | "error"
     }
     CompositeTypes: {
       [_ in never]: never
