@@ -85,3 +85,5 @@ There is a heirarchy of various concepts that have implications on the business 
 4. Scans - files can have multiple scans. Each scan has a status and a result.
 
 Other notes: We will likely want the concept of a sandbox environment. This is where customers can integrate and we will just pass the file through the system, or deliberately fail it. In this way, API keys are assigned a livemode, true or false to determine this fact.
+
+**Initially however, we will just focus on creating users (who will be automatically assigned a team in the background).**
