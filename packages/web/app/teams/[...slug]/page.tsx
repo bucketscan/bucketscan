@@ -5,7 +5,7 @@ export default function Page() {
     <>
       <Card>
         <CardHeader>
-          { /* TODO: Replace with team name */ }
+          {/* TODO: Replace with team name */}
           <h1>My Team Name</h1>
         </CardHeader>
         <CardBody>
@@ -31,5 +31,5 @@ export default function Page() {
         </CardBody>
       </Card>
     </>
-  )
+  );
 }

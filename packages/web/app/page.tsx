@@ -1,4 +1,30 @@
 import GreenCheck from "@/components/GreenCheck";
+import { Link } from "@nextui-org/react";
+
+const content = {
+  cloudproviders: [
+    {
+      name: "Amazon S3",
+      logo: "/images/icons/aws-s3.png",
+      link: "/virus-scanning-for-s3",
+    },
+    {
+      name: "Azure Blob Storage",
+      logo: "/images/icons/azure-blob.png",
+      link: "/virus-scanning-for-azure",
+    },
+    {
+      name: "Google Cloud Storage",
+      logo: "/images/icons/google-cloud-storage.png",
+      link: "/virus-scanning-for-google-cloud-storage",
+    },
+    {
+      name: "Cloudflare R2",
+      logo: "/images/icons/cloudflare.png",
+      link: "/virus-scanning-for-cloudflare-r2",
+    },
+  ],
+};
 
 export default function Page() {
   return (
@@ -31,6 +57,35 @@ export default function Page() {
         </div>
       </section>
 
+      {/* We support section */}
+      <section id="supported-providers" className="mx-auto my-20 max-w-7xl">
+        <div className="text-center">
+          <h2 className="text-4xl font-semibold">
+            Protect all your Cloud Storage Buckets
+          </h2>
+          <p className="text-xl font-light text-gray-500">
+            BucketScan supports all major cloud providers.
+          </p>
+
+          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
+            {content.cloudproviders.map(({ name, logo, link }) => (
+              <Link href={link}>
+                <button className="flex h-full w-full flex-col items-center justify-center rounded border-0 bg-white px-6 py-4 text-xl text-black shadow-[5px_5px_0px_0px_rgba(0,0,0)] shadow-black outline transition-all hover:translate-x-1 hover:translate-y-1 hover:bg-gray-100 hover:shadow-none">
+                  <img
+                    src={logo}
+                    alt=""
+                    className="mb-2 block"
+                    height="100"
+                    width="100"
+                  />
+                  <p className="mb-1 font-bold">{name}</p>
+                </button>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Benefits Section */}
       <section id="features" className="mt-20">
         <div className="container mx-auto">
@@ -42,7 +97,7 @@ export default function Page() {
               Designed for solutions architects, engineering leads, and CTOs
             </p>
           </div>
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-3">
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
             <div className="rounded-lg bg-white p-8 shadow-sm">
               <h3 className="text-xl font-semibold text-gray-800">
                 Rapid Integration
@@ -77,16 +132,6 @@ export default function Page() {
               <p className="text-md mt-4 text-gray-600">
                 Save on infrastructure and maintenance costs with our
                 cloud-based solution.
-              </p>
-            </div>
-            <div className="rounded-lg bg-white p-8 shadow-sm">
-              <h3 className="text-xl font-semibold text-gray-800">
-                AWS? GCP? Azure? No Problem.
-              </h3>
-              <p className="text-md mt-4 text-gray-600">
-                BucketScan natively supports a variety of cloud platforms.
-                Providing a consistent approach to security whereever your data
-                is.
               </p>
             </div>
           </div>
