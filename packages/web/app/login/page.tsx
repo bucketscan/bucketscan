@@ -1,14 +1,22 @@
 'use client';
 
 import { getURL } from '@/utils/helpers';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
+import { createSupabaseClient } from '@/utils/supabaseClient';
 import { useUser } from '@supabase/auth-helpers-react';
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
+import { redirect } from 'next/navigation';
+import { useEffect } from 'react';
 
 export default function Page() {
   const user = useUser();
-  const supabase = createClientComponentClient()
+
+  useEffect(() => {
+    debugger;
+    if (user) {
+      redirect('/dashboard');
+    }
+  }, [user]);
 
   if (!user)
     return (
@@ -18,10 +26,10 @@ export default function Page() {
           </div>
           <div className="flex flex-col space-y-4 h-full">
             <Auth
-              supabaseClient={supabase}
+              supabaseClient={createSupabaseClient()}
               view="sign_in"
               providers={['google', 'github']}
-              redirectTo={`${getURL()}auth/callback`}
+              redirectTo={`http://localhost:3000/auth/callback`}
               magicLink={true}
               appearance={{ theme: ThemeSupa }}
               theme="light"

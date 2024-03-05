@@ -21,9 +21,15 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL('/', req.url))
   }
 
+  // Check the API key header if querying the API
+  if (req.nextUrl.pathname.includes('/api/v1')) {
+    // TODO: Add API key header check
+    // Should grab the API key and make sure they have an active subscription or within the trial credits.
+  }
+
   return res
 }
 
 export const config = {
-  matcher: ['/', '/dashboard'],
+  matcher: ['/', '/dashboard', '/api/v1/**', '/api/v1/**/*'],
 }
