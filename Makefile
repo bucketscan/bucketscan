@@ -15,7 +15,7 @@ install:
 
 .PHONY: build
 build:
-	npx pnpm build
+	scripts/build.sh
 
 .PHONY: run
 run:
