@@ -342,7 +342,7 @@ export default function Page() {
               <div className="mb-4">
                 <label
                   className="mb-2 block text-sm font-bold text-gray-700"
-                  for="name"
+                  htmlFor="name"
                 >
                   Name
                 </label>
@@ -356,7 +356,7 @@ export default function Page() {
               <div className="mb-4">
                 <label
                   className="mb-2 block text-sm font-bold text-gray-700"
-                  for="email"
+                  htmlFor="email"
                 >
                   Email
                 </label>
@@ -370,7 +370,7 @@ export default function Page() {
               <div className="mb-4">
                 <label
                   className="mb-2 block text-sm font-bold text-gray-700"
-                  for="message"
+                  htmlFor="message"
                 >
                   Message
                 </label>

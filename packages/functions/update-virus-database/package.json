@@ -1,5 +1,5 @@
 {
-  "name": "@bucketscan/functions",
+  "name": "@bucketscan/update-virus-database",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
