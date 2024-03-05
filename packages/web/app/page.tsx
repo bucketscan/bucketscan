@@ -24,6 +24,89 @@ const content = {
       link: "/virus-scanning-for-cloudflare-r2",
     },
   ],
+  features: {
+    scanInformation: {
+      title: "Accept Customer content with no risk",
+      subtitle:
+        "User content uploads always carry risk. Bucketscan removes that by providing instant anti-virus scanning on a schedule that suits you. Our virus databases are always up to date and powered by ClamAV.",
+      links: [
+        {
+          name: "Real-Time Scan",
+          link: "",
+        },
+        {
+          name: "On-Demand Scan",
+          link: "",
+        },
+        {
+          name: "Scheduled Scan",
+          link: "",
+        },
+        {
+          name: "On Access Scan",
+          link: "",
+        },
+        {
+          name: "ClamAV Anti Virus Engine",
+          link: "",
+        },
+      ],
+    },
+    integrationInfo: {
+      title: "Integrate in just 20 minutes",
+      subtitle:
+        "Start scanning multiple buckets, across multiple accounts on multiple cloud providers. You can integrate with as many as you like on any plan. Then have all the data show up in our powerful platform.",
+      links: [
+        {
+          name: "Multiple Clouds (AWS, Azure, GCP, Cloudflare)",
+          link: "",
+        },
+        {
+          name: "Multiple Account",
+          link: "",
+        },
+        {
+          name: "Multiple Buckets",
+          link: "",
+        },
+        {
+          name: "Powerful Reporting",
+          link: "",
+        },
+        {
+          name: "Custom Integration",
+          link: "",
+        },
+      ],
+    },
+    dataInfo: {
+      title: "Notifications where you team works",
+      subtitle:
+        "Empower your security team to be notified on new scans and threats.Provide rich reports to your data analytics team.You can configure how and when your team is notified to suit your needs.",
+      links: [
+        {
+          name: "Slack Integration",
+          link: "",
+        },
+        {
+          name: "Teams Integration",
+          link: "",
+        },
+        {
+          name: "Data Warehouse Integration",
+          link: "",
+        },
+        {
+          name: "Powerful Reporting",
+          link: "",
+        },
+        {
+          name: "Custom Integration",
+          link: "",
+        },
+      ],
+    },
+  },
 };
 
 export default function Page() {
@@ -83,6 +166,67 @@ export default function Page() {
               </Link>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Expanded features section - link off to individual pages like bucketav.com */}
+      <section id="expanded-features" className="my-20 max-w-7xl">
+        <div>
+          <div className="">
+            <h2 className="text-3xl font-semibold">
+              {content.features.scanInformation.title}
+            </h2>
+            <p className="text-xl text-gray-500">
+              {content.features.scanInformation.subtitle}
+            </p>
+          </div>
+          <ul>
+            {content.features.dataInfo.links.map(({ name, link }) => {
+              return (
+                <li>
+                  <Link href={link}>{name}</Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div>
+          <div className="">
+            <h2 className="text-3xl font-semibold">
+              {content.features.integrationInfo.title}
+            </h2>
+            <p className="text-xl text-gray-500">
+              {content.features.integrationInfo.subtitle}
+            </p>
+          </div>
+          <ul>
+            {content.features.dataInfo.links.map(({ name, link }) => {
+              return (
+                <li>
+                  <Link href={link}>{name}</Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+        <div>
+          <div className="">
+            <h2 className="text-3xl font-semibold">
+              {content.features.dataInfo.title}
+            </h2>
+            <p className="text-xl text-gray-500">
+              {content.features.dataInfo.subtitle}
+            </p>
+          </div>
+          <ul>
+            {content.features.dataInfo.links.map(({ name, link }) => {
+              return (
+                <li>
+                  <Link href={link}>{name}</Link>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </section>
 
@@ -178,11 +322,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Expanded features section - link off to individual pages like bucketav.com */}
-
       {/* Reviews / Testimonials */}
-
-      {/* Legal section */}
 
       {/* Get the fact sheet section - enter email, and get sent a product fact sheet + newsletter sign up */}
       <section id="contact" className="mt-20">
