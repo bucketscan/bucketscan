@@ -7,7 +7,12 @@ SHELL := /bin/bash
 clean:
 	rm -rf .sst/ \
 		node_modules/ \
-		**/node_modules/
+		**/node_modules/ \
+		**/*.env*
+
+.PHONY: init
+init:
+	scripts/init.sh
 
 .PHONY: install
 install:
@@ -15,7 +20,7 @@ install:
 
 .PHONY: build
 build:
-	npx pnpm build
+	scripts/build.sh
 
 .PHONY: run
 run:
@@ -41,7 +46,7 @@ destroy:
 # Combined commands
 ###################################################################
 .PHONY: setup
-setup: install build run
+setup: init install build run
 
 .PHONY: teardown
 teardown: destroy clean
