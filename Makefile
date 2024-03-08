@@ -7,7 +7,8 @@ SHELL := /bin/bash
 clean:
 	rm -rf .sst/ \
 		node_modules/ \
-		**/node_modules/
+		**/node_modules/ \
+		**/*.env*
 
 .PHONY: init
 init:
