@@ -119,9 +119,8 @@ export default function Page() {
             Antivirus Protection for Your Cloud Storage
           </h1>
           <p className="mt-4 text-lg text-gray-600">
-            Enterprise-grade Virus Scanning Solution that supports Amazon S3,
-            Cloudflare R2 and Google Cloud Storage to secure your business
-            platform.
+            Automatically scan for viruses and ensure compliance across all user
+            uploads with our seamless, integrated solution.
           </p>
           <a
             href="#demo"
@@ -153,13 +152,13 @@ export default function Page() {
           <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
             {content.cloudproviders.map(({ name, logo, link }) => (
               <Link href={link}>
-                <button className="flex h-full w-full flex-col items-center justify-center rounded border-0 bg-white px-6 py-4 text-xl text-black shadow-[5px_5px_0px_0px_rgba(0,0,0)] shadow-black outline transition-all hover:translate-x-1 hover:translate-y-1 hover:bg-gray-100 hover:shadow-none">
+                <button className="flex h-full w-full flex-col items-center justify-center rounded border-0 bg-white px-4 py-2 text-xl text-black shadow-[5px_5px_0px_0px_rgba(0,0,0)] shadow-black outline transition-all hover:translate-x-1 hover:translate-y-1 hover:bg-gray-100 hover:shadow-none">
                   <img
                     src={logo}
                     alt=""
                     className="mb-2 block"
-                    height="100"
-                    width="100"
+                    height="50"
+                    width="50"
                   />
                   <p className="mb-1 font-bold">{name}</p>
                 </button>
@@ -168,6 +167,48 @@ export default function Page() {
           </div>
         </div>
       </section>
+
+      {/* Pain points */}
+      <section className="mx-auto my-20 max-w-7xl">
+        <div className="mb-8 text-center">
+          <h2 className="text-3xl font-semibold">
+            Are Constant Security Threats Slowing You Down?
+          </h2>
+        </div>
+        <div className="grid grid-cols-2 gap-8">
+          <div>
+            <h3 className="text-center text-2xl font-medium">Is this you?</h3>
+            <p className="text-gray-500">
+              You're spending countless hours every week reviewing and managing
+              security measures to protect against malware in user uploads.
+              Despite your best efforts, the threat of a breach is never far
+              away, and the manual processes are cumbersome, error-prone, and
+              inefficient.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-center text-2xl font-medium">
+              Facing Compliance Headaches?
+            </h3>
+            <p className="text-gray-500">
+              Navigating the maze of compliance regulations is a nightmare.
+              GDPR, HIPAA, SOC-2 – the list goes on. Every upload could be a
+              potential compliance violation, leading to hefty fines and a
+              tarnished brand reputation. You're caught in a constant battle to
+              stay ahead, yet always feel one step behind.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Product GIF Video of a Demo - can use icons etc. */}
+      <div className="mx-auto h-[720px] w-[1280px] bg-red-500">
+        <h2 className="text-center text-5xl text-white">Product demo</h2>
+      </div>
+
+      {/* Reviews / Testimonials */}
+
+      {/* Thin CTA */}
 
       {/* Expanded features section - link off to individual pages like bucketav.com */}
       <section id="expanded-features" className="my-20 max-w-7xl">
@@ -230,65 +271,8 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Benefits Section */}
-      <section id="features" className="mt-20">
-        <div className="container mx-auto">
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold text-gray-800">
-              Why Bucketscan?
-            </h2>
-            <p className="text-lg text-gray-600">
-              Designed for solutions architects, engineering leads, and CTOs
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
-            <div className="rounded-lg bg-white p-8 shadow-sm">
-              <h3 className="text-xl font-semibold text-gray-800">
-                Rapid Integration
-              </h3>
-              <p className="text-md mt-4 text-gray-600">
-                Easily integrate with existing systems through our robust API,
-                compatible with various business software and platforms.
-              </p>
-            </div>
-            <div className="rounded-lg bg-white p-8 shadow-sm">
-              <h3 className="text-xl font-semibold text-gray-800">
-                Enhanced Security
-              </h3>
-              <p className="text-md mt-4 text-gray-600">
-                Provide real-time virus scanning to secure user uploads and
-                protect your data from threats.
-              </p>
-            </div>
-            <div className="rounded-lg bg-white p-8 shadow-sm">
-              <h3 className="text-xl font-semibold text-gray-800">
-                Scan when you want.
-              </h3>
-              <p className="text-md mt-4 text-gray-600">
-                Detect malware in real-time, periodically or on-demand. All
-                accessible with our easy-to-use API.
-              </p>
-            </div>
-            <div className="rounded-lg bg-white p-8 shadow-sm">
-              <h3 className="text-xl font-semibold text-gray-800">
-                No Self-Hosting Required
-              </h3>
-              <p className="text-md mt-4 text-gray-600">
-                Save on infrastructure and maintenance costs with our
-                cloud-based solution.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Product GIF Video of a Demo - can use icons etc. */}
-      {/* How it works section */}
-
-      {/* Thin CTA */}
-
       {/* Legal section */}
-      <section id="compliance" className="mt-20 bg-gray-100 py-12">
+      {/* <section id="compliance" className="mt-20 bg-gray-100 py-12">
         <div className="container mx-auto text-center">
           <h2 className="text-3xl font-bold text-gray-800">
             Compliance and Regulations
@@ -320,17 +304,18 @@ export default function Page() {
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Reviews / Testimonials */}
+      </section> */}
 
       {/* Get the fact sheet section - enter email, and get sent a product fact sheet + newsletter sign up */}
       <section id="contact" className="mt-20">
         <div className="container mx-auto">
           <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold text-gray-800">Get In Touch</h2>
+            <h2 className="text-3xl font-bold text-gray-800">
+              Want more information on BucketScan?
+            </h2>
             <p className="text-lg text-gray-600">
-              Ready to enhance your platform's security? Let's connect.
+              Enter your email below and get the Bucketscan product fact sheet
+              for free
             </p>
           </div>
           <div className="flex justify-center">
@@ -342,20 +327,6 @@ export default function Page() {
               <div className="mb-4">
                 <label
                   className="mb-2 block text-sm font-bold text-gray-700"
-                  htmlFor="name"
-                >
-                  Name
-                </label>
-                <input
-                  className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-                  id="name"
-                  type="text"
-                  placeholder="Your Name"
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  className="mb-2 block text-sm font-bold text-gray-700"
                   htmlFor="email"
                 >
                   Email
@@ -364,39 +335,28 @@ export default function Page() {
                   className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
                   id="email"
                   type="email"
-                  placeholder="Your Email"
+                  placeholder="Enter your email address"
                 />
               </div>
               <div className="mb-4">
-                <label
-                  className="mb-2 block text-sm font-bold text-gray-700"
-                  htmlFor="message"
-                >
-                  Message
+                <input type="checkbox" id="checkbox" />
+                <label htmlFor="checkbox">
+                  &nbsp; I want to subscribe to the Bucketscan newsletter and
+                  recieve the free product factsheet
                 </label>
-                <textarea
-                  className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-                  id="message"
-                  rows={3}
-                  placeholder="Your Message"
-                ></textarea>
               </div>
               <div className="flex items-center justify-between">
                 <button
                   className="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-400 focus:outline-none"
                   type="submit"
                 >
-                  Send
+                  Subscribe
                 </button>
               </div>
             </form>
           </div>
         </div>
       </section>
-
-      {/* Pricing */}
-
-      {/* Big CTA */}
     </>
   );
 }
