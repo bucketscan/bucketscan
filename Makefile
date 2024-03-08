@@ -9,6 +9,10 @@ clean:
 		node_modules/ \
 		**/node_modules/
 
+.PHONY: init
+init:
+	scripts/init.sh
+
 .PHONY: install
 install:
 	npx pnpm install -r
@@ -41,7 +45,7 @@ destroy:
 # Combined commands
 ###################################################################
 .PHONY: setup
-setup: install build run
+setup: init install build run
 
 .PHONY: teardown
 teardown: destroy clean
