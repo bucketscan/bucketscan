@@ -5,9 +5,9 @@ SHELL := /bin/bash
 ###################################################################
 .PHONY: clean
 clean:
-	rm -rf .sst/ \
-		node_modules/ \
+	rm -rf node_modules/ \
 		**/node_modules/ \
+		packages/web/{.next,.open-next,next-env.d.ts}/ \
 		**/*.env*
 
 .PHONY: init
