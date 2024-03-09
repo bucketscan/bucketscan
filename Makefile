@@ -16,7 +16,7 @@ init:
 
 .PHONY: install
 install:
-	npx pnpm install -r
+	scripts/install.sh
 
 .PHONY: build
 build:
@@ -24,11 +24,7 @@ build:
 
 .PHONY: run
 run:
-	npx pnpm dev
-
-.PHONY: web
-web:
-	npx pnpm --filter web run dev:local
+	cd packages/web; yarn dev
 
 .PHONY: supabase-init
 supabase-init:
@@ -38,15 +34,15 @@ supabase-init:
 .PHONY: supabase-start
 	npx supabase start
 
-.PHONY: destroy
-destroy:
-	npx pnpm remove
+.PHONY: deploy
+deploy:
+	echo "TODO: Deploy functions and db migrations to Supabase"
 
 ###################################################################
 # Combined commands
 ###################################################################
 .PHONY: setup
-setup: init install build run
+setup: init install run
 
 .PHONY: teardown
-teardown: destroy clean
+teardown: clean

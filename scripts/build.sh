@@ -2,11 +2,10 @@
 
 set -e
 
-if [ -n "$FILTER" ];
-then
-  npx pnpm --filter "$FILTER" build
-else
-  echo "To filter what you build, set the FILTER environment variable"
-
-  npx pnpm build
-fi
+for dir in $(find packages/ -type d ! -path "*/node_modules*")
+do
+  [ -e "$dir/package.json" ] && {
+    echo "Building $dir..."
+    (cd "$dir"; yarn build)
+  }
+done
