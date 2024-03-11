@@ -18,34 +18,33 @@ export async function GET(req: NextApiRequest, res: NextApiResponse) {
     const command = new PutObjectCommand({ Bucket: bucket, Key: key });
     const presignedUrl = await getSignedUrl(client, command, { expiresIn: 3600 });
 
-    // @ts-expect-error
     const { data: fileData, error: fileError } = await supabase
       .from('files')
       .insert({
         name: key,
         accountid: '', // hopefully we can attach this in the middleware
+        filesize: 0,
+        status: "clean"
       })
       .single();
 
     if (fileError) throw fileError;
 
     // Create the new scan record in Supabase
-    // @ts-expect-error
-    const { data, error } = await supabase
+    const fileId = "TODO: File Id" // TODO: This fails as fileData has "never" type - fileData.id,
+    const { error } = await supabase
       .from('scans')
-      .insert([
-        {
-          // @ts-expect-error
-          fileid: fileData.id,
-          accountid: '',
-        }
-      ]);
+      .insert({
+        fileid: fileId,
+        accountid: '',
+        result: "pending"
+      })
 
     if (error) throw error;
 
     // Return the scan response
-    // @ts-expect-error
-    return res.status(200).json({ presignedUrl, fileId: fileData.id, scanId: data.scanId });
+    const scanId = "TODO: Find the scan Id" // TODO: This fails as the data returned is always null
+    return res.status(200).json({ presignedUrl, fileId, scanId });
   } catch (error) {
     console.error('Error fetching presigned URL or inserting to Supabase:', error);
     return res.status(500).json({ error: 'Internal Server Error' });

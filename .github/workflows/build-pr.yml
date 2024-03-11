@@ -35,6 +35,10 @@ jobs:
       #     restore-keys: |
       #       ${{ runner.os }}-pnpm-store-
 
+      - name: Typecheck
+        shell: bash
+        run: (cd packages/web; yarn typecheck)
+
       - name: Build
         shell: bash
         run: make install build
