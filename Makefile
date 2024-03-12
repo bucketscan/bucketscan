@@ -5,9 +5,9 @@ SHELL := /bin/bash
 ###################################################################
 .PHONY: clean
 clean:
-	rm -rf .sst/ \
-		node_modules/ \
+	rm -rf node_modules/ \
 		**/node_modules/ \
+		packages/web/{.next,.open-next,next-env.d.ts}/ \
 		**/*.env*
 
 .PHONY: init
@@ -16,7 +16,11 @@ init:
 
 .PHONY: install
 install:
-	npx pnpm install -r
+	scripts/install.sh
+
+.PHONY: check
+check:
+	cd packages/web; yarn typecheck
 
 .PHONY: build
 build:
@@ -24,11 +28,7 @@ build:
 
 .PHONY: run
 run:
-	npx pnpm dev
-
-.PHONY: web
-web:
-	npx pnpm --filter web run dev:local
+	cd packages/web; yarn dev
 
 .PHONY: supabase-init
 supabase-init:
@@ -38,15 +38,15 @@ supabase-init:
 .PHONY: supabase-start
 	npx supabase start
 
-.PHONY: destroy
-destroy:
-	npx pnpm remove
+.PHONY: deploy
+deploy:
+	echo "TODO: Deploy functions and db migrations to Supabase"
 
 ###################################################################
 # Combined commands
 ###################################################################
 .PHONY: setup
-setup: init install build run
+setup: init install run
 
 .PHONY: teardown
-teardown: destroy clean
+teardown: clean

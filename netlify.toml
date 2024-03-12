@@ -1,0 +1,4 @@
+[build]
+base = "packages/web"
+publish = ".next"
+command = "yarn build"
