@@ -35,10 +35,14 @@ jobs:
       #     restore-keys: |
       #       ${{ runner.os }}-pnpm-store-
 
+      - name: Install dependencies
+        shell: bash
+        run: make install
+
       - name: Typecheck
         shell: bash
-        run: (cd packages/web; yarn typecheck)
+        run: make check
 
       - name: Build
         shell: bash
-        run: make install build
+        run: make build

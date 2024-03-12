@@ -18,6 +18,10 @@ init:
 install:
 	scripts/install.sh
 
+.PHONY: check
+check:
+	cd packages/web; yarn typecheck
+
 .PHONY: build
 build:
 	scripts/build.sh
