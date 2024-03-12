@@ -26,27 +26,23 @@ check:
 build:
 	scripts/build.sh
 
-.PHONY: run
-run:
-	cd packages/web; yarn dev
-
-.PHONY: supabase-init
-supabase-init:
-	npx supabase login
-	(cd packages/web; npx supabase link --project-ref ydtwazcntqtdfhorddrm && npx supabase db pull)
-
-.PHONY: supabase-start
+.PHONY: start-backend
+start-backend:
 	npx supabase start
 
-.PHONY: deploy
-deploy:
-	echo "TODO: Deploy functions and db migrations to Supabase"
+.PHONY: stop-backend
+stop-backend:
+	npx supabase stop
+
+.PHONY: start-webapp
+start-webapp:
+	cd packages/web; yarn dev
 
 ###################################################################
 # Combined commands
 ###################################################################
 .PHONY: setup
-setup: init install run
+setup: init install
 
 .PHONY: teardown
-teardown: clean
+teardown: stop-backend clean

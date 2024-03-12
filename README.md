@@ -17,7 +17,11 @@ The following tools are required to build and run this project.
 Run the following command from the terminal to build and run the project.
 
 ```shell
+# This runs the initialization step and builds the code
 $ make setup
+
+# Now you can run locally using the following
+$ make start
 ```
 
 ## Cleanup
@@ -28,29 +32,9 @@ To clean up all build outputs, run the following command in the terminal:
 $ make teardown
 ```
 
-## Running Locally
-
-To run the app run the following commands from the terminal:
-
-```shell
-$ make run
-```
-
 ## Working with Supabase
 
-<!-- TODO: Need to compare this against the init step and ideally roll this up into that. -->
-
-To develop locally, you can use the `supabase` CLI to start a local instance of the Supabase database. To do this, run the following command:
-
-```shell
-# Initialize the local database
-$ make supabase-init
-
-# Start the instance in Docker
-$ make supabase-start
-```
-
-This will create a local instance of the Supabase database in Docker.
+<!-- TODO: This step needs updating. We also need to consider how we are going to handle migrations. -->
 
 To create a new migration run
 
