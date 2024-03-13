@@ -19,9 +19,6 @@
     "paths": {
       "@/*": [
         "./*"
-      ],
-      "@bucketscan/core/*": [
-        "../core/src/*"
       ]
     },
     "plugins": [
