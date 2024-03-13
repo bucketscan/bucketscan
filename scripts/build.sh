@@ -2,7 +2,7 @@
 
 set -e
 
-for dir in $(find packages/ -type d ! -path "*/node_modules*")
+for dir in $(find ./ -type d ! -path "*/node_modules*" ! -path "*/.next*")
 do
   if [ -f "$dir/package.json" ];
   then

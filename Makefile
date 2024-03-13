@@ -7,7 +7,7 @@ SHELL := /bin/bash
 clean:
 	rm -rf node_modules/ \
 		**/node_modules/ \
-		packages/web/{.next,.open-next,next-env.d.ts}/ \
+		./webapp/{.next,.open-next,next-env.d.ts}/ \
 		**/*.env*
 
 .PHONY: init
@@ -20,7 +20,7 @@ install:
 
 .PHONY: check
 check:
-	cd packages/web; yarn typecheck
+	cd webapp; yarn typecheck
 
 .PHONY: build
 build:
@@ -36,7 +36,7 @@ stop-backend:
 
 .PHONY: start-webapp
 start-webapp:
-	cd packages/web; yarn dev
+	cd webapp; yarn dev
 
 ###################################################################
 # Combined commands

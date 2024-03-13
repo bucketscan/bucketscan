@@ -2,7 +2,7 @@
 
 set -e
 
-CONFIG=packages/web/.env.local
+CONFIG=./webapp/.env.local
 
 if [ ! -e "$CONFIG" ];
 then
