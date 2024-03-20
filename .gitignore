@@ -9,3 +9,7 @@ node_modules
 
 # local env files
 .env*.local
+
+# Terraform
+.terraform/
+backend.tf

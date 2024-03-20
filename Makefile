@@ -46,3 +46,11 @@ setup: init install
 
 .PHONY: teardown
 teardown: stop-backend clean
+
+###################################################################
+# Deployment
+###################################################################
+
+.PHONY: deploy
+deploy:
+	cd virus-api/terraform; terragrunt apply --auto-approve --terragrunt-non-interactive
