@@ -13,9 +13,9 @@ export const meta: Metadata = {
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <main id="skip">{children}</main>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
