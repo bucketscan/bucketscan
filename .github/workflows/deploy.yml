@@ -59,7 +59,7 @@ jobs:
       - name: "Setup dependency: Terragrunt"
         shell: bash
         run: |
-          sudo wget -q -0 /bin/terragrunt "https://github.com/gruntwork-io/terragrunt/releases/download/v0.55.16/terragrunt_linux_amd64"
+          sudo wget -q -O /bin/terragrunt "https://github.com/gruntwork-io/terragrunt/releases/download/v0.55.16/terragrunt_linux_amd64"
           sudo chmod +x /bin/terragrunt
           terragrunt -v
 
