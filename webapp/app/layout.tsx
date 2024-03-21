@@ -1,16 +1,23 @@
-"use client"
 import "../styles/globals.css";
 import Layout from "@/components/Layout";
-import {Providers} from "./providers";
+import { Providers } from "./providers";
+import type { Metadata } from "next";
 
-export default function RootLayout({children}: { children: React.ReactNode }) {
+export const metadata: Metadata = {
+  title: "Bucketscan",
+  description: "...",
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <html lang="en">
       <body>
         <Providers>
-          <Layout>
-            {children}
-          </Layout>
+          <Layout>{children}</Layout>
         </Providers>
       </body>
     </html>

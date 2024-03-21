@@ -1,4 +1,7 @@
+import { Features } from "@/components/Features";
 import GreenCheck from "@/components/GreenCheck";
+import LogoCloud from "@/components/LogoCloud";
+import Newsletter from "@/components/Newsletter";
 import { Link } from "@nextui-org/react";
 
 const content = {
@@ -113,209 +116,108 @@ export default function Page() {
   return (
     <>
       {/* Hero Section */}
-      <section className="mx-auto mt-10 max-w-7xl px-6">
-        <div className="text-center">
-          <h1 className="text-3xl font-bold text-gray-800 md:text-5xl">
-            Antivirus Protection for Your Cloud Storage
-          </h1>
-          <p className="mt-4 text-lg text-gray-600">
-            Enterprise-grade Virus Scanning Solution that supports Amazon S3,
-            Cloudflare R2 and Google Cloud Storage to secure your business
-            platform.
-          </p>
-          <a
-            href="#demo"
-            className="mt-8 inline-block rounded-lg bg-blue-500 px-6 py-3 text-white hover:bg-blue-400"
+      <div className="-z-[100] bg-gray-900">
+        <div className="relative isolate px-6 pt-14 lg:px-8">
+          <div
+            className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+            aria-hidden="true"
           >
-            Get Started for Free
-          </a>
-          <div className="flex justify-center pt-5">
-            <div className="inline-flex items-center">
-              <GreenCheck />
-              <span className="ml-1 text-lg">
-                Free Trial — No Credit Card Required
-              </span>
+            <div
+              className="relative left-[calc(50%-11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-[72.1875rem]"
+              style={{
+                clipPath:
+                  "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+              }}
+            ></div>
+          </div>
+          <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+            <div className="hidden sm:mb-8 sm:flex sm:justify-center">
+              <div className="relative rounded-full bg-indigo-500/15 px-3 py-1 text-sm leading-6 text-indigo-200 ring-1 ring-indigo-600/25 transition-all hover:ring-indigo-600/50">
+                We need your help to shape our product{" "}
+                <a
+                  href="https://forms.gle/nCLxarU95hm2cqGd8"
+                  target="_blank"
+                  className="font-semibold text-indigo-500"
+                >
+                  <span className="absolute inset-0" aria-hidden="true"></span>
+                  Fill out the customer feedback form
+                  <span aria-hidden="true">&rarr;</span>
+                </a>
+              </div>
+            </div>
+            <div className="text-center">
+              <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
+                Antivirus Protection for Your Cloud Storage
+              </h1>
+              <p className="mt-6 text-lg leading-8 text-white">
+                Automatically scan for viruses and ensure compliance across all
+                user uploads with our seamless, integrated solution.
+              </p>
+              <div className="mt-10 flex items-center justify-center gap-x-6">
+                <input
+                  id="email-address"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  className="flex-auto rounded-md border-0 px-3.5 py-2 text-black shadow-sm ring-1 ring-inset ring-white/10 transition-all focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
+                  placeholder="Enter your email"
+                />
+                <a
+                  href="#"
+                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Get Early Access
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* We support section */}
-      <section id="supported-providers" className="mx-auto my-20 max-w-7xl">
-        <div className="text-center">
-          <h2 className="text-4xl font-semibold">
-            Protect all your Cloud Storage Buckets
-          </h2>
-          <p className="text-xl font-light text-gray-500">
-            BucketScan supports all major cloud providers.
-          </p>
-
-          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-            {content.cloudproviders.map(({ name, logo, link }) => (
-              <Link href={link}>
-                <button className="flex h-full w-full flex-col items-center justify-center rounded border-0 bg-white px-6 py-4 text-xl text-black shadow-[5px_5px_0px_0px_rgba(0,0,0)] shadow-black outline transition-all hover:translate-x-1 hover:translate-y-1 hover:bg-gray-100 hover:shadow-none">
-                  <img
-                    src={logo}
-                    alt=""
-                    className="mb-2 block"
-                    height="100"
-                    width="100"
-                  />
-                  <p className="mb-1 font-bold">{name}</p>
-                </button>
-              </Link>
-            ))}
+          <div
+            className="absolute inset-x-0 top-[calc(100%-13rem)] -z-[100] transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
+            aria-hidden="true"
+          >
+            <div
+              className="relative left-[calc(50%+3rem)] -z-[100] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]"
+              style={{
+                clipPath:
+                  "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)",
+              }}
+            ></div>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Expanded features section - link off to individual pages like bucketav.com */}
-      <section id="expanded-features" className="my-20 max-w-7xl">
-        <div>
-          <div className="">
-            <h2 className="text-3xl font-semibold">
-              {content.features.scanInformation.title}
+      {/* Pain points */}
+      <section className="z-[100] mx-auto bg-gray-900">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-8 text-center">
+            <h2 className="text-3xl font-semibold text-white">
+              Constant Security Threats Slowing You Down?
             </h2>
-            <p className="text-xl text-gray-500">
-              {content.features.scanInformation.subtitle}
-            </p>
           </div>
-          <ul>
-            {content.features.dataInfo.links.map(({ name, link }) => {
-              return (
-                <li>
-                  <Link href={link}>{name}</Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        <div>
-          <div className="">
-            <h2 className="text-3xl font-semibold">
-              {content.features.integrationInfo.title}
-            </h2>
-            <p className="text-xl text-gray-500">
-              {content.features.integrationInfo.subtitle}
-            </p>
-          </div>
-          <ul>
-            {content.features.dataInfo.links.map(({ name, link }) => {
-              return (
-                <li>
-                  <Link href={link}>{name}</Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-        <div>
-          <div className="">
-            <h2 className="text-3xl font-semibold">
-              {content.features.dataInfo.title}
-            </h2>
-            <p className="text-xl text-gray-500">
-              {content.features.dataInfo.subtitle}
-            </p>
-          </div>
-          <ul>
-            {content.features.dataInfo.links.map(({ name, link }) => {
-              return (
-                <li>
-                  <Link href={link}>{name}</Link>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      </section>
-
-      {/* Benefits Section */}
-      <section id="features" className="mt-20">
-        <div className="container mx-auto">
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold text-gray-800">
-              Why Bucketscan?
-            </h2>
-            <p className="text-lg text-gray-600">
-              Designed for solutions architects, engineering leads, and CTOs
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-4">
-            <div className="rounded-lg bg-white p-8 shadow-sm">
-              <h3 className="text-xl font-semibold text-gray-800">
-                Rapid Integration
+          <div className="grid grid-cols-2 gap-8">
+            <div className="rounded-md bg-white px-6 py-8">
+              <h3 className="mb-4 text-center text-2xl font-medium">
+                Is this you?
               </h3>
-              <p className="text-md mt-4 text-gray-600">
-                Easily integrate with existing systems through our robust API,
-                compatible with various business software and platforms.
+              <p className="leading-relaxed">
+                You're spending countless hours every week reviewing and
+                managing security measures to protect against malware in user
+                uploads. Despite your best efforts, the threat of a breach is
+                never far away, and the manual processes are cumbersome,
+                error-prone, and inefficient.
               </p>
             </div>
-            <div className="rounded-lg bg-white p-8 shadow-sm">
-              <h3 className="text-xl font-semibold text-gray-800">
-                Enhanced Security
+            <div className="rounded-md bg-white px-6 py-8">
+              <h3 className="mb-4 text-center text-2xl font-medium">
+                Facing Compliance Headaches?
               </h3>
-              <p className="text-md mt-4 text-gray-600">
-                Provide real-time virus scanning to secure user uploads and
-                protect your data from threats.
-              </p>
-            </div>
-            <div className="rounded-lg bg-white p-8 shadow-sm">
-              <h3 className="text-xl font-semibold text-gray-800">
-                Scan when you want.
-              </h3>
-              <p className="text-md mt-4 text-gray-600">
-                Detect malware in real-time, periodically or on-demand. All
-                accessible with our easy-to-use API.
-              </p>
-            </div>
-            <div className="rounded-lg bg-white p-8 shadow-sm">
-              <h3 className="text-xl font-semibold text-gray-800">
-                No Self-Hosting Required
-              </h3>
-              <p className="text-md mt-4 text-gray-600">
-                Save on infrastructure and maintenance costs with our
-                cloud-based solution.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Product GIF Video of a Demo - can use icons etc. */}
-      {/* How it works section */}
-
-      {/* Thin CTA */}
-
-      {/* Legal section */}
-      <section id="compliance" className="mt-20 bg-gray-100 py-12">
-        <div className="container mx-auto text-center">
-          <h2 className="text-3xl font-bold text-gray-800">
-            Compliance and Regulations
-          </h2>
-          <p className="mt-4 text-lg text-gray-600">
-            Meet essential compliance requirements effortlessly.
-          </p>
-          <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
-            <div className="rounded-lg bg-white p-6 shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-800">GDPR</h3>
-              <p className="text-md mt-2 text-gray-600">
-                Ensure user data protection and privacy in accordance with GDPR
-                standards.
-              </p>
-            </div>
-            <div className="rounded-lg bg-white p-6 shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-800">HIPAA</h3>
-              <p className="text-md mt-2 text-gray-600">
-                Protect sensitive health information with compliance to HIPAA
-                guidelines.
-              </p>
-            </div>
-            <div className="rounded-lg bg-white p-6 shadow-sm">
-              <h3 className="text-lg font-semibold text-gray-800">SOC 2</h3>
-              <p className="text-md mt-2 text-gray-600">
-                Adhere to high standards for security, availability, processing
-                integrity, confidentiality, and privacy.
+              <p className="leading-relaxed">
+                Navigating the maze of compliance regulations is a nightmare.
+                GDPR, HIPAA, SOC-2 – the list goes on. Every upload could be a
+                potential compliance violation, leading to hefty fines and a
+                tarnished brand reputation. You're caught in a constant battle
+                to stay ahead, yet always feel one step behind.
               </p>
             </div>
           </div>
@@ -324,79 +226,17 @@ export default function Page() {
 
       {/* Reviews / Testimonials */}
 
-      {/* Get the fact sheet section - enter email, and get sent a product fact sheet + newsletter sign up */}
-      <section id="contact" className="mt-20">
-        <div className="container mx-auto">
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl font-bold text-gray-800">Get In Touch</h2>
-            <p className="text-lg text-gray-600">
-              Ready to enhance your platform's security? Let's connect.
-            </p>
-          </div>
-          <div className="flex justify-center">
-            <form
-              action="#"
-              method="post"
-              className="w-full max-w-xl rounded-lg bg-white p-8 shadow-md"
-            >
-              <div className="mb-4">
-                <label
-                  className="mb-2 block text-sm font-bold text-gray-700"
-                  htmlFor="name"
-                >
-                  Name
-                </label>
-                <input
-                  className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-                  id="name"
-                  type="text"
-                  placeholder="Your Name"
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  className="mb-2 block text-sm font-bold text-gray-700"
-                  htmlFor="email"
-                >
-                  Email
-                </label>
-                <input
-                  className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-                  id="email"
-                  type="email"
-                  placeholder="Your Email"
-                />
-              </div>
-              <div className="mb-4">
-                <label
-                  className="mb-2 block text-sm font-bold text-gray-700"
-                  htmlFor="message"
-                >
-                  Message
-                </label>
-                <textarea
-                  className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
-                  id="message"
-                  rows={3}
-                  placeholder="Your Message"
-                ></textarea>
-              </div>
-              <div className="flex items-center justify-between">
-                <button
-                  className="focus:shadow-outline rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-400 focus:outline-none"
-                  type="submit"
-                >
-                  Send
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
+      {/* Thin CTA */}
+
+      {/* Expanded features section - link off to individual pages like bucketav.com */}
+      <section id="expanded-features">
+        <Features />
       </section>
 
-      {/* Pricing */}
-
-      {/* Big CTA */}
+      {/* Get the fact sheet section - enter email, and get sent a product fact sheet + newsletter sign up */}
+      <section id="contact">
+        <Newsletter />
+      </section>
     </>
   );
 }
