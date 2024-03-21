@@ -3,8 +3,17 @@ import {
   CodeBracketIcon,
   BellAlertIcon,
 } from "@heroicons/react/24/outline";
+import { ReactNode } from "react";
 
-const Feature = ({ title, description, icon }) => (
+const Feature = ({
+  title,
+  description,
+  icon,
+}: {
+  title: string;
+  description: string;
+  icon: ReactNode;
+}) => (
   <div key={title}>
     <dt className="flex items-center justify-center align-middle text-base font-semibold leading-7 text-white">
       <div className="inline-block rounded-md bg-indigo-600 p-2 ring-1 ring-white">
