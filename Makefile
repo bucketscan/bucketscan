@@ -53,4 +53,4 @@ teardown: stop-backend clean
 
 .PHONY: deploy
 deploy:
-	cd virus-api/terraform; terragrunt init && terragrunt apply --auto-approve --terragrunt-non-interactive
+	cd virus-api/terraform; terragrunt apply --auto-approve --terragrunt-non-interactive

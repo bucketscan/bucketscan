@@ -9,7 +9,7 @@ remote_state {
   config = {
     bucket  = "slade-personal-terraform-state"
     region  = "eu-west-2"
-    key     = "aws-access/terraform.tfstate"
+    key     = "bucketscan/terraform.tfstate"
     encrypt = true
     dynamodb_table = "terraform-state-lock"
   }
