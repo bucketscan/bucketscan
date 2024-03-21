@@ -10,6 +10,9 @@ The following tools are required to build and run this project.
 
 1. [Node.js](https://nodejs.org/en/download)
 1. An IDE such as [VSCode](https://code.visualstudio.com/download)
+1. [AWS CLI v2](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
+1. [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+1. [Terragrunt](https://terragrunt.gruntwork.io/docs/getting-started/install/)
 1. [Docker](https://docs.docker.com/desktop)
 
 ## Build and run the project

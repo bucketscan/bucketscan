@@ -3,6 +3,7 @@
     "editorconfig.editorconfig",
     "unifiedjs.vscode-mdx",
     "xyc.vscode-mdx-preview",
-    "tamasfe.even-better-toml"
+    "tamasfe.even-better-toml",
+    "HashiCorp.terraform"
   ]
 }
