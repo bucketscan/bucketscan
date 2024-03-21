@@ -11,6 +11,6 @@ remote_state {
     region  = "eu-west-2"
     key     = "aws-access/terraform.tfstate"
     encrypt = true
-    dynamodb_table = "terraform-lock-table"
+    dynamodb_table = "terraform-state-lock"
   }
 }
