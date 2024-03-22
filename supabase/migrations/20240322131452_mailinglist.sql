@@ -1,0 +1,8 @@
+BEGIN;
+
+CREATE TABLE mailinglist (
+  email     TEXT    NOT NULL  PRIMARY KEY,
+  createdOn DATE    NOT NULL  DEFAULT CURRENT_DATE
+);
+
+COMMIT;
