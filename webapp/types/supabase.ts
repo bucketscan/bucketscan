@@ -12,7 +12,7 @@ export type Database = {
       mailinglist: {
         Row: {
           email: string
-          createdon: string
+          createdOn: string
         }
       }
       files: {
