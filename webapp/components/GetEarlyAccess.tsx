@@ -2,7 +2,7 @@
 
 import { memo, useState } from "react"
 
-const isValidEmail = (email: string): boolean => !email // TODO: Regex validation
+const isValidEmail = (email: string): boolean => !!email // TODO: Regex validation
 
 const SubmissionSuccessful = () => (
   <section className="z-[100] mx-auto bg-gray-900 mt-10">
@@ -21,14 +21,15 @@ const GetEarlyAccess = () => {
   const [loading, setLoading] = useState(false)
   const [submitted, setSubmitted] = useState(false)
 
-  const submit = () => {
+  const submit = async () => {
     setLoading(true)
 
-    // TODO: Submit.
-    setTimeout(() => {
-      setLoading(false)
-      setSubmitted(true)
-    }, 3000)
+    await fetch("/api/v1/subscribe?" + new URLSearchParams({
+      email
+    }))
+
+    setLoading(false)
+    setSubmitted(true)
   }
 
   if (submitted) {
