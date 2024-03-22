@@ -10,8 +10,7 @@ export async function GET(request: NextRequest, _: NextResponse): Promise<Respon
   // TODO: Lookup the email first so we're not trying to insert it twice.
   const { error, count, status } = await supabase.from("mailinglist")
     .insert({
-      email,
-      createdon: new Date().toISOString()
+      email
     })
     .single()
 
