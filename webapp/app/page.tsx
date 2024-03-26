@@ -1,116 +1,6 @@
-import { Features } from "@/components/Features";
-import GreenCheck from "@/components/GreenCheck";
-import LogoCloud from "@/components/LogoCloud";
-import Newsletter from "@/components/Newsletter";
-import { Link } from "@nextui-org/react";
-
-const content = {
-  cloudproviders: [
-    {
-      name: "Amazon S3",
-      logo: "/images/icons/aws-s3.png",
-      link: "/virus-scanning-for-s3",
-    },
-    {
-      name: "Azure Blob Storage",
-      logo: "/images/icons/azure-blob.png",
-      link: "/virus-scanning-for-azure",
-    },
-    {
-      name: "Google Cloud Storage",
-      logo: "/images/icons/google-cloud-storage.png",
-      link: "/virus-scanning-for-google-cloud-storage",
-    },
-    {
-      name: "Cloudflare R2",
-      logo: "/images/icons/cloudflare.png",
-      link: "/virus-scanning-for-cloudflare-r2",
-    },
-  ],
-  features: {
-    scanInformation: {
-      title: "Accept Customer content with no risk",
-      subtitle:
-        "User content uploads always carry risk. Bucketscan removes that by providing instant anti-virus scanning on a schedule that suits you. Our virus databases are always up to date and powered by ClamAV.",
-      links: [
-        {
-          name: "Real-Time Scan",
-          link: "",
-        },
-        {
-          name: "On-Demand Scan",
-          link: "",
-        },
-        {
-          name: "Scheduled Scan",
-          link: "",
-        },
-        {
-          name: "On Access Scan",
-          link: "",
-        },
-        {
-          name: "ClamAV Anti Virus Engine",
-          link: "",
-        },
-      ],
-    },
-    integrationInfo: {
-      title: "Integrate in just 20 minutes",
-      subtitle:
-        "Start scanning multiple buckets, across multiple accounts on multiple cloud providers. You can integrate with as many as you like on any plan. Then have all the data show up in our powerful platform.",
-      links: [
-        {
-          name: "Multiple Clouds (AWS, Azure, GCP, Cloudflare)",
-          link: "",
-        },
-        {
-          name: "Multiple Account",
-          link: "",
-        },
-        {
-          name: "Multiple Buckets",
-          link: "",
-        },
-        {
-          name: "Powerful Reporting",
-          link: "",
-        },
-        {
-          name: "Custom Integration",
-          link: "",
-        },
-      ],
-    },
-    dataInfo: {
-      title: "Notifications where you team works",
-      subtitle:
-        "Empower your security team to be notified on new scans and threats.Provide rich reports to your data analytics team.You can configure how and when your team is notified to suit your needs.",
-      links: [
-        {
-          name: "Slack Integration",
-          link: "",
-        },
-        {
-          name: "Teams Integration",
-          link: "",
-        },
-        {
-          name: "Data Warehouse Integration",
-          link: "",
-        },
-        {
-          name: "Powerful Reporting",
-          link: "",
-        },
-        {
-          name: "Custom Integration",
-          link: "",
-        },
-      ],
-    },
-  },
-};
+import { Features } from "@/components/Features"
+import GetEarlyAccess from "@/components/GetEarlyAccess"
+import Newsletter from "@/components/Newsletter"
 
 export default function Page() {
   return (
@@ -153,23 +43,7 @@ export default function Page() {
                 Automatically scan for viruses and ensure compliance across all
                 user uploads with our seamless, integrated solution.
               </p>
-              <div className="mt-10 flex items-center justify-center gap-x-6">
-                <input
-                  id="email-address"
-                  name="email"
-                  type="email"
-                  autoComplete="email"
-                  required
-                  className="flex-auto rounded-md border-0 px-3.5 py-2 text-black shadow-sm ring-1 ring-inset ring-white/10 transition-all focus:ring-2 focus:ring-inset focus:ring-indigo-500 sm:text-sm sm:leading-6"
-                  placeholder="Enter your email"
-                />
-                <a
-                  href="#"
-                  className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                >
-                  Get Early Access
-                </a>
-              </div>
+              <GetEarlyAccess />
             </div>
           </div>
           <div
