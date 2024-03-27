@@ -1,0 +1,15 @@
+{
+  "name": "@bucketscan/update-virus-database",
+  "version": "1.0.0",
+  "description": "Pulls latest virus database files from ClamAV to update the local database",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "esbuild index.ts --bundle --minify --sourcemap --platform=node --target=es2020 --outfile=dist/index.js",
+    "start": "./run-local.sh"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.136",
+    "esbuild": "^0.20.2"
+  }
+}
