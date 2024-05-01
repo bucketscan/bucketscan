@@ -1,7 +1,8 @@
 import { memo } from "react"
+import Section from "@/components/pages/home/Section"
 
 const PainPoints = () => (
-  <section className="z-[100] mx-auto bg-gray-900">
+  <Section id="pain-points">
     <div className="mx-auto max-w-7xl">
       <div className="mb-8 text-center">
         <h2 className="text-3xl font-semibold text-white">
@@ -35,7 +36,7 @@ const PainPoints = () => (
         </div>
       </div>
     </div>
-  </section>
+  </Section>
 )
 
 export default memo(PainPoints)

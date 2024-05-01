@@ -1,4 +1,4 @@
-import { Features } from "@/components/Features"
+import Features from "@/components/Features"
 import GetEarlyAccess from "@/components/GetEarlyAccess"
 import Newsletter from "@/components/Newsletter"
 import PainPoints from "@/components/pages/home/PainPoints"
@@ -75,9 +75,7 @@ export default function Page() {
       </section>
 
       {/* Get the fact sheet section - enter email, and get sent a product fact sheet + newsletter sign up */}
-      <section id="contact">
-        <Newsletter />
-      </section>
+      <Newsletter />
     </>
   );
 }
