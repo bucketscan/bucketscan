@@ -25,4 +25,5 @@ export default async (): Promise<void> => {
   await runFreshClam()
 
   console.log("TODO: Copy database files into S3 bucket")
+  // Files are stored in /var/lib/clamav/*.cvd
 }
