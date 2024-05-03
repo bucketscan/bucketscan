@@ -4,7 +4,7 @@ info:
   version: 1.0.0
   description: API for scanning files in S3 or R2 Buckets for viruses.
 servers:
-  - url: https://api.bucketscan.com/api/v1
+  - url: https://bucketscan.com/api/v1
 components:
   securitySchemes:
     ApiKeyAuth:
@@ -15,7 +15,7 @@ components:
     ScanStatus:
       type: object
       properties:
-        scanID:
+        scanId:
           type: string
         status:
           type: string
@@ -23,7 +23,7 @@ components:
         metadata:
           type: object
           properties:
-            fileID:
+            fileId:
               type: string
             result:
               type: string
@@ -33,7 +33,7 @@ components:
     FileStatus:
       type: object
       properties:
-        fileID:
+        fileId:
           type: string
         status:
           type: string
@@ -46,7 +46,7 @@ components:
         files:
           type: array
           items:
-            $ref: '#/components/schemas/FileStatus'
+            $ref: "#/components/schemas/FileStatus"
 security:
   - ApiKeyAuth: []
 paths:
@@ -55,68 +55,68 @@ paths:
       operationId: getPresignedUrl
       summary: Get a presigned URL to upload a file
       responses:
-        '200':
+        "200":
           description: Presigned URL and identifiers returned
           content:
             application/json:
               schema:
                 type: object
                 properties:
-                  scanID:
+                  scanId:
                     type: string
-                  fileID:
+                  fileId:
                     type: string
                   presignedUrl:
                     type: string
-        '401':
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Server Error
-  /scans/{scanID}:
+  /scans/{scanId}:
     get:
       operationId: getScanStatus
       summary: Check the status and metadata of a scan
       parameters:
-        - name: scanID
+        - name: scanId
           in: path
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: Scan status and metadata
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ScanStatus'
-        '401':
+                $ref: "#/components/schemas/ScanStatus"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Server Error
-  /files/{fileID}:
+  /files/{fileId}:
     get:
       operationId: getFileStatus
       summary: Check the status and metadata of a file
       parameters:
-        - name: fileID
+        - name: fileId
           in: path
           required: true
           schema:
             type: string
       responses:
-        '200':
+        "200":
           description: File status and metadata
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileStatus'
-        '401':
+                $ref: "#/components/schemas/FileStatus"
+        "401":
           description: Unauthorized
-        '404':
+        "404":
           description: Not Found
-        '500':
+        "500":
           description: Server Error
   /files:
     get:
@@ -130,13 +130,13 @@ paths:
             type: string
             enum: [clean, infected, error]
       responses:
-        '200':
+        "200":
           description: List of files
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FileListResponse'
-        '401':
+                $ref: "#/components/schemas/FileListResponse"
+        "401":
           description: Unauthorized
-        '500':
+        "500":
           description: Server Error
