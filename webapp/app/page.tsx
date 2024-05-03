@@ -1,6 +1,7 @@
-import { Features } from "@/components/Features"
+import Features from "@/components/Features"
 import GetEarlyAccess from "@/components/GetEarlyAccess"
 import Newsletter from "@/components/Newsletter"
+import PainPoints from "@/components/pages/home/PainPoints"
 
 export default function Page() {
   return (
@@ -62,41 +63,7 @@ export default function Page() {
       </div>
 
       {/* Pain points */}
-      <section className="z-[100] mx-auto bg-gray-900">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-8 text-center">
-            <h2 className="text-3xl font-semibold text-white">
-              Constant Security Threats Slowing You Down?
-            </h2>
-          </div>
-          <div className="grid grid-cols-2 gap-8">
-            <div className="rounded-md bg-white px-6 py-8">
-              <h3 className="mb-4 text-center text-2xl font-medium">
-                Is this you?
-              </h3>
-              <p className="leading-relaxed">
-                You're spending countless hours every week reviewing and
-                managing security measures to protect against malware in user
-                uploads. Despite your best efforts, the threat of a breach is
-                never far away, and the manual processes are cumbersome,
-                error-prone, and inefficient.
-              </p>
-            </div>
-            <div className="rounded-md bg-white px-6 py-8">
-              <h3 className="mb-4 text-center text-2xl font-medium">
-                Facing Compliance Headaches?
-              </h3>
-              <p className="leading-relaxed">
-                Navigating the maze of compliance regulations is a nightmare.
-                GDPR, HIPAA, SOC-2 – the list goes on. Every upload could be a
-                potential compliance violation, leading to hefty fines and a
-                tarnished brand reputation. You're caught in a constant battle
-                to stay ahead, yet always feel one step behind.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
+      <PainPoints />
 
       {/* Reviews / Testimonials */}
 
@@ -108,9 +75,7 @@ export default function Page() {
       </section>
 
       {/* Get the fact sheet section - enter email, and get sent a product fact sheet + newsletter sign up */}
-      <section id="contact">
-        <Newsletter />
-      </section>
+      <Newsletter />
     </>
   );
 }
