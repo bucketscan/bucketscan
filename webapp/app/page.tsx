@@ -22,7 +22,7 @@ export default function Page() {
             ></div>
           </div>
           <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-            <div className="hidden sm:mb-8 sm:flex sm:justify-center">
+            <div className="sm:mb-8 sm:flex sm:justify-center">
               <div className="relative rounded-full bg-indigo-500/15 px-3 py-1 text-sm leading-6 text-indigo-200 ring-1 ring-indigo-600/25 transition-all hover:ring-indigo-600/50">
                 We need your help to shape our product{" "}
                 <a
