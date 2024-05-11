@@ -2,6 +2,7 @@ import Features from "@/components/Features"
 import GetEarlyAccess from "@/components/GetEarlyAccess"
 import Newsletter from "@/components/Newsletter"
 import PainPoints from "@/components/pages/home/PainPoints"
+import ProductSurvey from "@/components/pages/home/ProductSurvey"
 
 export default function Page() {
   return (
@@ -22,20 +23,8 @@ export default function Page() {
             ></div>
           </div>
           <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
-            <div className="sm:mb-8 sm:flex sm:justify-center">
-              <div className="relative rounded-full bg-indigo-500/15 px-3 py-1 text-sm leading-6 text-indigo-200 ring-1 ring-indigo-600/25 transition-all hover:ring-indigo-600/50">
-                We need your help to shape our product{" "}
-                <a
-                  href="https://forms.gle/nCLxarU95hm2cqGd8"
-                  target="_blank"
-                  className="font-semibold text-indigo-500"
-                >
-                  <span className="absolute inset-0" aria-hidden="true"></span>
-                  Fill out the customer feedback form
-                  <span aria-hidden="true">&rarr;</span>
-                </a>
-              </div>
-            </div>
+            <ProductSurvey />
+
             <div className="text-center">
               <h1 className="text-4xl font-bold tracking-tight text-white sm:text-6xl">
                 Antivirus Protection for Your Cloud Storage
