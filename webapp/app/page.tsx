@@ -3,6 +3,7 @@ import GetEarlyAccess from "@/components/GetEarlyAccess"
 import Newsletter from "@/components/Newsletter"
 import PainPoints from "@/components/pages/home/PainPoints"
 import ProductSurvey from "@/components/pages/home/ProductSurvey"
+import ContactUs from "@/components/pages/home/ContactUs"
 
 export default function Page() {
   return (
@@ -65,6 +66,7 @@ export default function Page() {
 
       {/* Get the fact sheet section - enter email, and get sent a product fact sheet + newsletter sign up */}
       <Newsletter />
+      <ContactUs />
     </>
   );
 }
