@@ -12,6 +12,11 @@ resource "aws_kms_key" "scan_files" {
   enable_key_rotation = true
 }
 
+resource "aws_kms_alias" "scan_files" {
+  target_key_id = aws_kms_key.scan_files.id
+  name          = "alias/bucketscan-scan-files"
+}
+
 resource "aws_s3_bucket_server_side_encryption_configuration" "scan_files" {
   bucket = aws_s3_bucket.scan_files.bucket
 
@@ -44,8 +49,7 @@ resource "aws_s3_bucket_versioning" "scan_files" {
   bucket = aws_s3_bucket.scan_files.bucket
 
   versioning_configuration {
-    status     = "Enabled"
-    mfa_delete = "Enabled"
+    status = "Enabled"
   }
 }
 

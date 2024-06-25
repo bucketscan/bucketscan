@@ -12,6 +12,11 @@ resource "aws_kms_key" "logging" {
   enable_key_rotation = true
 }
 
+resource "aws_kms_alias" "logging" {
+  target_key_id = aws_kms_key.logging.id
+  name          = "alias/bucketscan-logging"
+}
+
 resource "aws_s3_bucket_server_side_encryption_configuration" "logging" {
   bucket = aws_s3_bucket.logging.bucket
 
@@ -44,8 +49,7 @@ resource "aws_s3_bucket_versioning" "logging" {
   bucket = aws_s3_bucket.logging.bucket
 
   versioning_configuration {
-    status     = "Enabled"
-    mfa_delete = "Enabled"
+    status = "Enabled"
   }
 }
 
