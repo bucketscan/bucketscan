@@ -33,8 +33,8 @@ data "aws_iam_policy_document" "guardduty_permissions" {
     ]
 
     condition {
-      variable = "StringLike"
-      test     = "events:ManagedBy"
+      test     = "StringLike"
+      variable = "events:ManagedBy"
       values   = ["malware-protection-plan.guardduty.amazonaws.com"]
     }
   }
