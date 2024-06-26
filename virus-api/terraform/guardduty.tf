@@ -2,7 +2,7 @@ data "aws_iam_policy_document" "guardduty_assume" {
   version = "2012-10-17"
 
   statement {
-    actions = "sts:AssumeRole"
+    actions = ["sts:AssumeRole"]
 
     principals {
       type        = "Service"
@@ -90,7 +90,7 @@ data "aws_iam_policy_document" "guardduty_permissions" {
     actions = [
       "s3:ListBucket"
     ]
-    resources = "arn:aws:s3:::${aws_s3_bucket.scan_files.bucket}"
+    resources = ["arn:aws:s3:::${aws_s3_bucket.scan_files.bucket}"]
   }
 
   statement {
