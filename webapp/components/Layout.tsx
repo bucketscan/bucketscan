@@ -1,5 +1,5 @@
 "use client";
-import Navbar from "./Navbar";
+import { Navbar } from "./Navbar";
 import { ReactNode } from "react";
 import { Metadata } from "next";
 import Footer from "./Footer";
@@ -14,6 +14,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       {/* <Navbar /> */}
+      <Navbar />
       <main id="skip">{children}</main>
       {/* <Footer /> */}
     </>
