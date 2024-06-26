@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "logging" {
-  bucket = "bucketscan-bucket-logging"
+  bucket = "bucketscan-logging"
 }
 
 #################################################
