@@ -128,7 +128,7 @@ resource "aws_iam_role_policy" "guardduty_permissions" {
 }
 
 resource "aws_guardduty_malware_protection_plan" "scan_files" {
-  role = aws_iam_role.guardduty.id
+  role = aws_iam_role.guardduty.arn
 
   protected_resource {
     s3_bucket {
