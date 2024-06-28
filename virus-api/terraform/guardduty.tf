@@ -111,7 +111,7 @@ data "aws_iam_policy_document" "guardduty_permissions" {
       "kms:Decrypt"
     ]
     resources = [
-      aws_kms_key.scan_files.key_id
+      aws_kms_key.scan_files.arn
     ]
     condition {
       test     = "StringLike"
