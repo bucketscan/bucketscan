@@ -1,8 +1,9 @@
 "use client";
-import Navbar from "./Navbar";
+import { Navbar } from "./Navbar";
 import { ReactNode } from "react";
 import { Metadata } from "next";
 import Footer from "./Footer";
+import { Toaster } from "react-hot-toast";
 
 export const meta: Metadata = {
   title: "BucketScan - Malware Detection and Prevention for S3 Buckets",
@@ -14,7 +15,9 @@ export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
       {/* <Navbar /> */}
+      <Navbar />
       <main id="skip">{children}</main>
+      <Toaster />
       {/* <Footer /> */}
     </>
   );
