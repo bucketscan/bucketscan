@@ -16,7 +16,17 @@ export default async function Dashboard() {
     redirect("/login");
   }
   const { data: personalAccount } = await supabase.rpc("get_personal_account");
-  console.log(personalAccount);
+  const { data: subscriptionData } = await supabase.functions.invoke(
+    "billing-functions",
+    {
+      body: {
+        action: "get_billing_status",
+        args: {
+          account_id: personalAccount.account_id,
+        },
+      },
+    },
+  );
   return (
     <>
       <Card>
@@ -29,15 +39,14 @@ export default async function Dashboard() {
       </Card>
       <Card>
         <CardHeader>
-          <div>
-            <h2>API Credits</h2>
-          </div>
-          <div>
-            <p>0 of 100 - 0% of quota used</p>
-          </div>
+          <h2>API Credits</h2>
         </CardHeader>
         <CardBody>
-          <Progress aria-label="API Credits" value={60} className="max-w-md" />
+          {subscriptionData && subscriptionData.subscription_active ? (
+            <p>You have a subscription</p>
+          ) : (
+            <p>You don't have a subscription</p>
+          )}
         </CardBody>
       </Card>
     </>
