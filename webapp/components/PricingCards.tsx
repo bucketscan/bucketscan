@@ -1,22 +1,41 @@
 "use client";
 
 import { useState } from "react";
-import { Card, CardBody, CardHeader, Tabs, Tab } from "@nextui-org/react";
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  Tabs,
+  Tab,
+  Button,
+} from "@nextui-org/react";
+import { startSubscription } from "@/app/pricing/page"; // Import the server action
 
-const PricingCardsContent = ({ plans }) => (
+const PricingCardsContent = ({ plans, accountId }) => (
   <>
     {plans.map(({ currency, id, interval, price, product_name }) => (
       <Card key={id}>
         <CardHeader>{product_name}</CardHeader>
         <CardBody>
           £{price / 100} {currency.toUpperCase()}
+          <Button
+            onClick={async () => {
+              if (accountId) {
+                await startSubscription(accountId, id); // Call the server action
+              } else {
+                redirect("/login");
+              }
+            }}
+          >
+            Subscribe
+          </Button>
         </CardBody>
       </Card>
     ))}
   </>
 );
 
-export const PricingCards = ({ pricingPlans }) => {
+export const PricingCards = ({ pricingPlans, accountId }) => {
   const [selectedTab, setSelectedTab] = useState("monthly");
 
   const monthlyPlans = pricingPlans?.filter(
@@ -35,12 +54,18 @@ export const PricingCards = ({ pricingPlans }) => {
           >
             <Tab key="monthly" title="Monthly">
               {selectedTab === "monthly" && (
-                <PricingCardsContent plans={monthlyPlans} />
+                <PricingCardsContent
+                  plans={monthlyPlans}
+                  accountId={accountId}
+                />
               )}
             </Tab>
             <Tab key="yearly" title="Yearly">
               {selectedTab === "yearly" && (
-                <PricingCardsContent plans={yearlyPlans} />
+                <PricingCardsContent
+                  plans={yearlyPlans}
+                  accountId={accountId}
+                />
               )}
             </Tab>
           </Tabs>
