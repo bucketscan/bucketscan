@@ -1,7 +1,5 @@
-import FullScreenConfetti from "@/components/Confetti";
 import { ManageBillingButton } from "@/components/ManageBillingButton";
 import { LabelWithCopy } from "@/components/label-with-copy";
-import { manageSubscription } from "@/utils/billing";
 import { createClient } from "@/utils/supabase/server";
 
 import {
@@ -32,7 +30,6 @@ export default async function Dashboard() {
   );
   return (
     <>
-      <FullScreenConfetti />
       <Card>
         <CardHeader>
           <h2>API Key</h2>

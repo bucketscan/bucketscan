@@ -1,5 +1,5 @@
 "use client";
-import { manageSubscription } from "@/utils/billing";
+import { manageSubscription } from "@/app/pricing/page";
 import { Button } from "@nextui-org/react";
 export const ManageBillingButton = ({ accountId }: { accountId: string }) => {
   return (
