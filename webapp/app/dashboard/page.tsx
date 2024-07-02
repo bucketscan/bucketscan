@@ -1,4 +1,7 @@
+import FullScreenConfetti from "@/components/Confetti";
+import { ManageBillingButton } from "@/components/ManageBillingButton";
 import { LabelWithCopy } from "@/components/label-with-copy";
+import { manageSubscription } from "@/utils/billing";
 import { createClient } from "@/utils/supabase/server";
 
 import {
@@ -7,7 +10,7 @@ import {
   CardHeader,
   Progress,
 } from "@nextui-org/react";
-import { redirect } from "next/navigation";
+import { redirect, useSearchParams } from "next/navigation";
 
 export default async function Dashboard() {
   const supabase = createClient();
@@ -29,6 +32,7 @@ export default async function Dashboard() {
   );
   return (
     <>
+      <FullScreenConfetti />
       <Card>
         <CardHeader>
           <h2>API Key</h2>
@@ -43,7 +47,10 @@ export default async function Dashboard() {
         </CardHeader>
         <CardBody>
           {subscriptionData && subscriptionData.subscription_active ? (
-            <p>You have a subscription</p>
+            <>
+              <p>You have a subscription</p>
+              <ManageBillingButton accountId={personalAccount.account_id} />
+            </>
           ) : (
             <p>You don't have a subscription</p>
           )}
