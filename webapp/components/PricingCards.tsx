@@ -9,7 +9,8 @@ import {
   Tab,
   Button,
 } from "@nextui-org/react";
-import { startSubscription } from "@/app/pricing/page"; // Import the server action
+import { startSubscription } from "@/utils/billing";
+import { redirect } from "next/navigation";
 
 const PricingCardsContent = ({ plans, accountId }) => (
   <>

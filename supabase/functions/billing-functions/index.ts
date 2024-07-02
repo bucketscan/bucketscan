@@ -32,6 +32,5 @@ const billingEndpoint = billingFunctionsWrapper(stripeHandler, {
 
 serve(async (req) => {
   const response = await billingEndpoint(req);
-
   return response;
 });
