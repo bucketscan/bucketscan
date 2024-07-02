@@ -28,7 +28,7 @@ export const manageSubscription = async (accountId: string) => {
       action: "get_billing_portal_url",
       args: {
         account_id: accountId,
-        return_url: "string",
+        return_url: "http://localhost:3000/dashboard",
       },
     },
   });

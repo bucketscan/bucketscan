@@ -28,6 +28,7 @@ export default async function Dashboard() {
       },
     },
   );
+  console.log(subscriptionData);
   return (
     <>
       <Card>
@@ -46,6 +47,18 @@ export default async function Dashboard() {
           {subscriptionData && subscriptionData.subscription_active ? (
             <>
               <p>You have a subscription</p>
+              <p>
+                You have {personalAccount.private_metadata.credits} credits
+                remaining
+              </p>
+              <Progress
+                aria-label="API Credits"
+                value={personalAccount.private_metadata.credits}
+                className="max-w-md"
+                showValueLabel={true}
+                formatOptions={{}}
+                // maxValue={} // TODO: Add this with the max allowed for the plan
+              />
               <ManageBillingButton accountId={personalAccount.account_id} />
             </>
           ) : (

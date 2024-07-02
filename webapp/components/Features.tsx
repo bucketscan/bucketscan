@@ -1,5 +1,3 @@
-"use server";
-
 import { memo, ReactNode } from "react";
 import {
   ShieldCheckIcon,

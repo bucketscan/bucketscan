@@ -7,7 +7,8 @@ import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import {
   billingFunctionsWrapper,
   stripeFunctionHandler,
-} from "https://deno.land/x/basejump@v2.0.3/billing-functions/mod.ts";
+} from "https://raw.githubusercontent.com/joshghent/basejump-deno-packages/fix/account-id-optional/billing-functions/mod.ts";
+// from "https://deno.land/x/basejump@v2.0.3/billing-functions/mod.ts";
 
 import Stripe from "https://esm.sh/stripe@11.1.0?target=deno";
 
@@ -27,10 +28,19 @@ const stripeHandler = stripeFunctionHandler({
 });
 
 const billingEndpoint = billingFunctionsWrapper(stripeHandler, {
-  allowedURLs: ["http://localhost:3000"],
+  allowedURLs: ["http://localhost:3000", "http://localhost:3000/dashboard"],
 });
 
 serve(async (req) => {
+  const requestClone = req.clone();
+  const b = await requestClone.json();
+  console.log(b);
+
   const response = await billingEndpoint(req);
+
+  const responseClone = response.clone();
+  const r = await responseClone.json();
+  console.log(r);
+
   return response;
 });
