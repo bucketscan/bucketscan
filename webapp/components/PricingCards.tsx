@@ -9,8 +9,8 @@ import {
   Tab,
   Button,
 } from "@nextui-org/react";
-import { startSubscription } from "@/utils/billing";
 import { redirect } from "next/navigation";
+import { startSubscription } from "@/app/pricing/page";
 
 const PricingCardsContent = ({ plans, accountId }) => (
   <>
