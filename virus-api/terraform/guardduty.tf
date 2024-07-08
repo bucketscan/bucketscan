@@ -104,21 +104,21 @@ data "aws_iam_policy_document" "guardduty_permissions" {
     ]
   }
 
-  statement {
-    sid = "AllowDecryptForMalwareScan"
-    actions = [
-      "kms:GenerateDataKey",
-      "kms:Decrypt"
-    ]
-    resources = [
-      aws_kms_key.scan_files.arn
-    ]
-    condition {
-      test     = "StringLike"
-      variable = "kms:ViaService"
-      values   = ["s3.*.amazonaws.com"]
-    }
-  }
+  # statement {
+  #   sid = "AllowDecryptForMalwareScan"
+  #   actions = [
+  #     "kms:GenerateDataKey",
+  #     "kms:Decrypt"
+  #   ]
+  #   resources = [
+  #     aws_kms_key.scan_files.arn
+  #   ]
+  #   condition {
+  #     test     = "StringLike"
+  #     variable = "kms:ViaService"
+  #     values   = ["s3.*.amazonaws.com"]
+  #   }
+  # }
 }
 
 resource "aws_iam_role_policy" "guardduty_permissions" {

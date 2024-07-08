@@ -5,17 +5,17 @@ resource "aws_s3_bucket" "logging" {
 #################################################
 # Encryption
 #################################################
-resource "aws_kms_key" "logging" {
-  description             = "Encrypts objects uploaded to the Logging bucket"
-  deletion_window_in_days = 10
+# resource "aws_kms_key" "logging" {
+#   description             = "Encrypts objects uploaded to the Logging bucket"
+#   deletion_window_in_days = 10
 
-  enable_key_rotation = true
-}
+#   enable_key_rotation = true
+# }
 
-resource "aws_kms_alias" "logging" {
-  target_key_id = aws_kms_key.logging.id
-  name          = "alias/bucketscan-logging"
-}
+# resource "aws_kms_alias" "logging" {
+#   target_key_id = aws_kms_key.logging.id
+#   name          = "alias/bucketscan-logging"
+# }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "logging" {
   bucket = aws_s3_bucket.logging.bucket
@@ -24,8 +24,8 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "logging" {
     bucket_key_enabled = true
 
     apply_server_side_encryption_by_default {
-      kms_master_key_id = aws_kms_key.logging.arn
-      sse_algorithm     = "aws:kms"
+      # kms_master_key_id = aws_kms_key.logging.arn
+      sse_algorithm = "aws:kms"
     }
   }
 }

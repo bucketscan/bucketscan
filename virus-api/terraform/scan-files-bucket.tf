@@ -5,17 +5,17 @@ resource "aws_s3_bucket" "scan_files" {
 #################################################
 # Encryption
 #################################################
-resource "aws_kms_key" "scan_files" {
-  description             = "Encrypts objects uploaded to the Scan Files bucket"
-  deletion_window_in_days = 10
+# resource "aws_kms_key" "scan_files" {
+#   description             = "Encrypts objects uploaded to the Scan Files bucket"
+#   deletion_window_in_days = 10
 
-  enable_key_rotation = true
-}
+#   enable_key_rotation = true
+# }
 
-resource "aws_kms_alias" "scan_files" {
-  target_key_id = aws_kms_key.scan_files.id
-  name          = "alias/bucketscan-scan-files"
-}
+# resource "aws_kms_alias" "scan_files" {
+#   target_key_id = aws_kms_key.scan_files.id
+#   name          = "alias/bucketscan-scan-files"
+# }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "scan_files" {
   bucket = aws_s3_bucket.scan_files.bucket
@@ -24,8 +24,8 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "scan_files" {
     bucket_key_enabled = true
 
     apply_server_side_encryption_by_default {
-      kms_master_key_id = aws_kms_key.scan_files.arn
-      sse_algorithm     = "aws:kms"
+      # kms_master_key_id = aws_kms_key.scan_files.arn
+      sse_algorithm = "aws:kms"
     }
   }
 }
