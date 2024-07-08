@@ -17,6 +17,10 @@ resource "aws_s3_bucket" "scan_files" {
 #   name          = "alias/bucketscan-scan-files"
 # }
 
+# Deliberately not using a customer-managed key as this generates a cost
+# for the project, which we are trying to avoid for now. This still uses
+# server-side encryption, just using an AWS-managed key
+# tfsec:ignore:aws-s3-encryption-customer-key
 resource "aws_s3_bucket_server_side_encryption_configuration" "scan_files" {
   bucket = aws_s3_bucket.scan_files.bucket
 
