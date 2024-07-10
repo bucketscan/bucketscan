@@ -13,7 +13,7 @@ data "aws_iam_policy_document" "scan_files_bucket_cloudtrail" {
     }
 
     actions   = ["s3:GetBucketAcl"]
-    resources = [aws_s3_bucket.scan_files.arn]
+    resources = [aws_s3_bucket.logging.arn]
 
     condition {
       test     = "StringEquals"
@@ -31,7 +31,7 @@ data "aws_iam_policy_document" "scan_files_bucket_cloudtrail" {
     }
 
     actions   = ["s3:PutObject"]
-    resources = ["${aws_s3_bucket.scan_files.arn}/AWSLogs/${local.account_id}/*"]
+    resources = ["${aws_s3_bucket.logging.arn}/ScanFiles/AWSLogs/${local.account_id}/*"]
 
     condition {
       test     = "StringEquals"
@@ -48,7 +48,7 @@ data "aws_iam_policy_document" "scan_files_bucket_cloudtrail" {
 }
 
 resource "aws_s3_bucket_policy" "scan_files_bucket_cloudtrail" {
-  bucket = aws_s3_bucket.scan_files.id
+  bucket = aws_s3_bucket.logging.id
   policy = data.aws_iam_policy_document.scan_files_bucket_cloudtrail.json
 }
 
@@ -105,7 +105,8 @@ resource "aws_cloudtrail" "scan_files_bucket" {
   depends_on = [aws_s3_bucket_policy.scan_files_bucket_cloudtrail]
 
   name                          = "bucketscan-scan-files"
-  s3_bucket_name                = aws_s3_bucket.scan_files.id
+  s3_bucket_name                = aws_s3_bucket.logging.id
+  s3_key_prefix                 = "ScanFiles"
   include_global_service_events = true
   is_multi_region_trail         = true
   enable_log_file_validation    = true
@@ -113,12 +114,12 @@ resource "aws_cloudtrail" "scan_files_bucket" {
   cloud_watch_logs_role_arn     = aws_iam_role.scan_files_trail.arn
 
   event_selector {
-    read_write_type           = "All"
-    include_management_events = true
+    read_write_type           = "WriteOnly"
+    include_management_events = false
 
     data_resource {
       type   = "AWS::S3::Object"
-      values = ["arn:aws:s3:::${aws_s3_bucket.scan_files.bucket}/"]
+      values = ["arn:aws:s3:::${aws_s3_bucket.scan_files.bucket}/files"]
     }
   }
 }
