@@ -60,7 +60,7 @@ data "aws_iam_policy_document" "guardduty_permissions" {
       "s3:GetObjectVersionTagging"
     ]
     resources = [
-      "arn:aws:s3:::${aws_s3_bucket.scan_files.bucket}"
+      "arn:aws:s3:::${aws_s3_bucket.scan_files.bucket}/files/*"
     ]
   }
 
