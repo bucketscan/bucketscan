@@ -31,7 +31,7 @@ data "aws_iam_policy_document" "scan_files_bucket_cloudtrail" {
     }
 
     actions   = ["s3:PutObject"]
-    resources = ["${aws_s3_bucket.logging.arn}/prefix/AWSLogs/${local.account_id}/*"]
+    resources = ["${aws_s3_bucket.scan_files.arn}/AWSLogs/${local.account_id}/*"]
 
     condition {
       test     = "StringEquals"
@@ -109,7 +109,7 @@ resource "aws_cloudtrail" "scan_files_bucket" {
   include_global_service_events = true
   is_multi_region_trail         = true
   enable_log_file_validation    = true
-  cloud_watch_logs_group_arn    = aws_cloudwatch_log_group.scan_files_trail.arn
+  cloud_watch_logs_group_arn    = "${aws_cloudwatch_log_group.scan_files_trail.arn}:*"
   cloud_watch_logs_role_arn     = aws_iam_role.scan_files_trail.arn
 
   event_selector {
