@@ -132,7 +132,8 @@ resource "aws_guardduty_malware_protection_plan" "scan_files" {
 
   protected_resource {
     s3_bucket {
-      bucket_name = aws_s3_bucket.scan_files.id
+      bucket_name     = aws_s3_bucket.scan_files.id
+      object_prefixes = ["files"]
     }
   }
 
