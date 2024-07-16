@@ -1,0 +1,10 @@
+{
+  "Comment": "Processes notifications of files that have been scanned by GuardDuty for malware",
+  "StartAt": "Pass",
+  "States": {
+    "Pass": {
+      "Type": "Pass",
+      "End": true
+    }
+  }
+}
