@@ -24,6 +24,21 @@ const client = new S3Client({
   }
 })
 
+const uploadFile = async (file: File): Promise<boolean> => {
+
+  // TODO: Consider using the Upload command from the @aws-sdk/lib-storage package
+  // to stream the file upload directly into S3.
+  // See: https://stackoverflow.com/a/70159394/308012
+  const objectKey = `files/${ACCOUNT_ID}/${file.name}`
+  const response = await client.send(new PutObjectCommand({
+    Bucket: process.env.AWS_BUCKET_NAME ?? "",
+    Key: objectKey,
+    Body: (await file.arrayBuffer()) as Buffer
+  }))
+
+  return response.$metadata.httpStatusCode === 200
+}
+
 export async function POST(request: NextRequest) {
   const formData = await request.formData()
   const file = formData.get("file") as File
@@ -35,18 +50,11 @@ export async function POST(request: NextRequest) {
     })
   }
 
-  // TODO: Consider using the Upload command from the @aws-sdk/lib-storage package
-  // to stream the file upload directly into S3.
-  // See: https://stackoverflow.com/a/70159394/308012
-  const objectKey = `files/${ACCOUNT_ID}/${file.name}`
-  const response = await client.send(new PutObjectCommand({
-    Bucket: process.env.AWS_BUCKET_NAME ?? "",
-    Key: objectKey
-  }))
+  // TODO: Insert entry into scan table to track the pending operation.
 
-  if (response.$metadata.httpStatusCode !== 200) {
+  if (!await uploadFile(file)) {
     return NextResponse.json({
-      status: response.$metadata.httpStatusCode,
+      status: 500,
       statusText: "Upload failed"
     })
   }
