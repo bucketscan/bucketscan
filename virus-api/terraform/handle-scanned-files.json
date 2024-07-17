@@ -1,0 +1,15 @@
+{
+  "Comment": "Processes notifications of files that have been scanned by GuardDuty for malware",
+  "StartAt": "DeleteS3Object",
+  "States": {
+    "DeleteS3Object": {
+      "Type": "Task",
+      "Parameters": {
+        "Bucket.$": "$.detail.s3ObjectDetails.bucketName",
+        "Key.$": "$.detail.s3ObjectDetails.objectKey"
+      },
+      "Resource": "arn:aws:states:::aws-sdk:s3:deleteObject",
+      "End": true
+    }
+  }
+}
