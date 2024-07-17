@@ -1,3 +1,4 @@
+import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3"
 import { NextConfig } from "next"
 import { NextRequest, NextResponse } from "next/server"
 
@@ -13,6 +14,16 @@ export const config: NextConfig = {
 // the account setup is complete.
 const ACCOUNT_ID = "slade-local-test"
 
+// TODO: Determine if we can bin off the access keys approach.
+// https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_non-aws.html
+const client = new S3Client({
+  region: process.env.AWS_REGION ?? "",
+  credentials: {
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID ?? "",
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY ?? ""
+  }
+})
+
 export async function POST(request: NextRequest) {
   const formData = await request.formData()
   const file = formData.get("file") as File
@@ -24,7 +35,21 @@ export async function POST(request: NextRequest) {
     })
   }
 
+  const objectKey = `files/${ACCOUNT_ID}/${file.name}`
+  const response = await client.send(new PutObjectCommand({
+    Bucket: process.env.AWS_BUCKET_NAME ?? "",
+    Key: objectKey
+  }))
+
+  if (response.$metadata.httpStatusCode !== 200) {
+    return NextResponse.json({
+      status: response.$metadata.httpStatusCode,
+      statusText: "Upload failed"
+    })
+  }
+
   return NextResponse.json({
-    fileName: file.name
+    status: 200,
+    statusText: `Successfully uploaded ${file.name}!`
   })
 }
