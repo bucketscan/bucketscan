@@ -15,7 +15,7 @@ export const config: NextConfig = {
 const ACCOUNT_ID = "slade-local-test"
 
 // TODO: Determine if we can bin off the access keys approach.
-// https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_non-aws.html
+// See: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_non-aws.html
 const client = new S3Client({
   region: process.env.AWS_REGION ?? "",
   credentials: {
@@ -35,6 +35,9 @@ export async function POST(request: NextRequest) {
     })
   }
 
+  // TODO: Consider using the Upload command from the @aws-sdk/lib-storage package
+  // to stream the file upload directly into S3.
+  // See: https://stackoverflow.com/a/70159394/308012
   const objectKey = `files/${ACCOUNT_ID}/${file.name}`
   const response = await client.send(new PutObjectCommand({
     Bucket: process.env.AWS_BUCKET_NAME ?? "",
