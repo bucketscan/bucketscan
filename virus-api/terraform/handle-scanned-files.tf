@@ -71,6 +71,21 @@ resource "aws_iam_role" "handle_scanned_files" {
   assume_role_policy = data.aws_iam_policy_document.handle_scanned_files.json
 }
 
+data "aws_iam_policy_document" "delete_scanned_files" {
+  version = "2012-10-17"
+
+  statement {
+    actions   = ["s3:DeleteObject"]
+    resources = ["${aws_s3_bucket.scan_files.arn}/files/*"]
+  }
+}
+
+resource "aws_iam_role_policy" "delete_scanned_files" {
+  name   = "bucketscan-delete-scanned-files"
+  role   = aws_iam_role.handle_scanned_files.id
+  policy = data.aws_iam_policy_document.delete_scanned_files.json
+}
+
 #################################################################################
 # State Machine
 #################################################################################
