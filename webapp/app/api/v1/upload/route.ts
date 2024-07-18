@@ -1,18 +1,9 @@
-import { NextConfig } from "next"
-import { NextRequest, NextResponse } from "next/server"
+import { NextRequest } from "next/server"
 import { badRequest, internalServerError, ok } from "@/app/api/responses"
 import trackPendingScan from "./trackPendingScan"
 import uploadFile from "./uploadFile"
 import getAccountId from "./getAccountId"
 import { isError } from "../../Result"
-
-// Disable Next.js automatically parsing the request body,
-// so we can extract the file ourselves
-export const config: NextConfig = {
-  api: {
-    bodyParser: false
-  }
-}
 
 export async function POST(request: NextRequest) {
 
