@@ -13,7 +13,8 @@ export default async (accountId: string, objectKey: string): Promise<Result<Scan
       filereference: objectKey,
       result: "pending"
     })
-    .single();
+    .select()
+    .single()
 
   if (error) {
     return new Error(error.message)
