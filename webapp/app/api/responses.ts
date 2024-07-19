@@ -1,17 +1,25 @@
 import { NextResponse } from "next/server";
 
-export const internalServerError = (description: string): NextResponse => NextResponse.json({
-  status: 500,
-  statusText: description
-})
+export type HttpResponse = {
+  status: number
+  statusText: string
+}
 
-export const badRequest = (description?: string): NextResponse => NextResponse.json({
-  status: 400,
-  statusText: description
-})
+export const internalServerError = <TBody extends HttpResponse = HttpResponse>
+  (description: string): NextResponse<TBody> => NextResponse.json({
+    status: 500,
+    statusText: description
+  } as TBody)
 
-export const ok = (description?: string, result?: any): NextResponse => NextResponse.json({
-  status: 200,
-  statusText: description,
-  ...result
-})
+export const badRequest = <TBody extends HttpResponse = HttpResponse>
+  (description?: string): NextResponse<TBody> => NextResponse.json({
+    status: 400,
+    statusText: description
+  } as TBody)
+
+export const ok = <TBody extends HttpResponse = HttpResponse>
+  (description?: string, result?: any): NextResponse<TBody> => NextResponse.json({
+    status: 200,
+    statusText: description,
+    ...result
+  } as TBody)

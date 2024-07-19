@@ -1,5 +1,5 @@
 import { createSupabaseClient } from "@/utils/supabaseClient"
-import { Result } from "../../Result"
+import { Result } from "@/app/api/Result"
 
 const supabase = createSupabaseClient()
 

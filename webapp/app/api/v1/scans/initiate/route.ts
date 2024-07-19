@@ -1,12 +1,18 @@
-import { NextRequest } from "next/server"
-import { badRequest, internalServerError, ok } from "@/app/api/responses"
+import { NextRequest, NextResponse } from "next/server"
+import { badRequest, HttpResponse, internalServerError, ok } from "@/app/api/responses"
 import trackPendingScan from "./trackPendingScan"
 import uploadFile from "./uploadFile"
 import getAccountId from "./getAccountId"
 import { isError } from "@/app/api/Result"
 import generateFileReference from "./generateFileReference"
 
-export async function POST(request: NextRequest) {
+type InitiateScanResult = {
+  scanId: string
+  status: number
+  statusText: string
+}
+
+export async function POST(request: NextRequest): Promise<NextResponse<HttpResponse | InitiateScanResult>> {
 
   const accountId = getAccountId(request)
   if (isError(accountId)) {
