@@ -9,8 +9,8 @@ export default async (accountId: string, objectKey: string): Promise<Result<Scan
   const { data, error } = await supabase
     .from('scans')
     .insert({
-      accountid: accountId,
-      filereference: objectKey,
+      account_id: accountId,
+      file_reference: objectKey,
       result: "pending"
     })
     .select()

@@ -3,7 +3,8 @@ import { badRequest, internalServerError, ok } from "@/app/api/responses"
 import trackPendingScan from "./trackPendingScan"
 import uploadFile from "./uploadFile"
 import getAccountId from "./getAccountId"
-import { isError } from "../../Result"
+import { isError } from "@/app/api/Result"
+import generateFileReference from "./generateFileReference"
 
 export async function POST(request: NextRequest) {
 
@@ -19,15 +20,15 @@ export async function POST(request: NextRequest) {
     return badRequest("No file field in the form data")
   }
 
-  const objectKey = `files/${accountId}/${file.name}`
-  const trackPendingScanResult = await trackPendingScan(accountId, objectKey)
+  const fileReference = generateFileReference(accountId, file.name)
+  const trackPendingScanResult = await trackPendingScan(accountId, fileReference)
   if (isError(trackPendingScanResult)) {
-    return internalServerError("Failed to start the scan")
+    return internalServerError("Failed to start the scan: " + trackPendingScanResult.message)
   }
 
-  const uploadFileResult = await uploadFile(file, objectKey)
+  const uploadFileResult = await uploadFile(file, fileReference)
   if (isError(uploadFileResult)) {
-    return internalServerError("Upload failed")
+    return internalServerError("Upload failed: " + uploadFileResult.message)
   }
 
   return ok(`Successfully uploaded ${file.name}!`, {

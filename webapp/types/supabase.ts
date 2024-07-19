@@ -26,30 +26,30 @@ export type Database = {
       }
       scans: {
         Row: {
-          accountid: string
-          createdon: string
-          filereference: string
+          account_id: string
+          created_on: string
+          file_reference: string
           id: string
           result: Database["public"]["Enums"]["scan_result"]
         }
         Insert: {
-          accountid: string
-          createdon?: string
-          filereference: string
+          account_id: string
+          created_on?: string
+          file_reference: string
           id?: string
           result: Database["public"]["Enums"]["scan_result"]
         }
         Update: {
-          accountid?: string
-          createdon?: string
-          filereference?: string
+          account_id?: string
+          created_on?: string
+          file_reference?: string
           id?: string
           result?: Database["public"]["Enums"]["scan_result"]
         }
         Relationships: [
           {
             foreignKeyName: "fk_scans_accountid"
-            columns: ["accountid"]
+            columns: ["account_id"]
             isOneToOne: false
             referencedRelation: "accounts"
             referencedColumns: ["id"]
