@@ -12,79 +12,56 @@ components:
       in: header
       name: X-API-KEY
   schemas:
+    InitiateScanResult:
+      type: object
+      properties:
+        scanId:
+          type: string
+        status:
+          type: number
+        statusText:
+          type: string
     ScanStatus:
       type: object
       properties:
-        scanID:
+        scanId:
           type: string
         status:
           type: string
-          enum: [pending, in_progress, complete, error]
-        metadata:
-          type: object
-          properties:
-            fileID:
-              type: string
-            result:
-              type: string
-              enum: [clean, infected, error]
-            details:
-              type: string
-    FileStatus:
-      type: object
-      properties:
-        fileID:
-          type: string
-        status:
-          type: string
-          enum: [clean, infected, error]
-        details:
-          type: string
-    FileListResponse:
-      type: object
-      properties:
-        files:
-          type: array
-          items:
-            $ref: '#/components/schemas/FileStatus'
+          enum: [pending, complete_clean, complete_infected, failed]
 security:
   - ApiKeyAuth: []
 paths:
-  /presigned-url:
-    get:
-      operationId: getPresignedUrl
-      summary: Get a presigned URL to upload a file
+  /scans/initiate:
+    post:
+      operationId: initiateFileScan
+      summary: Uploads a file to initiate the virus scan
       responses:
         '200':
-          description: Presigned URL and identifiers returned
+          description: A reference to the file being scanned
           content:
             application/json:
               schema:
-                type: object
-                properties:
-                  scanID:
-                    type: string
-                  fileID:
-                    type: string
-                  presignedUrl:
-                    type: string
+                $ref: '#/components/schemas/InitiateScanResult'
         '401':
           description: Unauthorized
+        '404':
+          description: Not Found
         '500':
           description: Server Error
-  /scans/{scanID}:
+  /scans/{scanId}:
     get:
       operationId: getScanStatus
-      summary: Check the status and metadata of a scan
+      summary: Check the status of a scan
       parameters:
-        - name: scanID
+        - name: scanId
           in: path
           required: true
           schema:
             type: string
       responses:
         '200':
-          description: Scan status and metadata
+          description: The status of the file scan
           content:
             application/json:
               schema:
@@ -93,50 +70,5 @@ paths:
           description: Unauthorized
         '404':
           description: Not Found
-        '500':
-          description: Server Error
-  /files/{fileID}:
-    get:
-      operationId: getFileStatus
-      summary: Check the status and metadata of a file
-      parameters:
-        - name: fileID
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: File status and metadata
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FileStatus'
-        '401':
-          description: Unauthorized
-        '404':
-          description: Not Found
-        '500':
-          description: Server Error
-  /files:
-    get:
-      operationId: listFiles
-      summary: Get a list of files for the account
-      parameters:
-        - name: status
-          in: query
-          required: false
-          schema:
-            type: string
-            enum: [clean, infected, error]
-      responses:
-        '200':
-          description: List of files
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/FileListResponse'
-        '401':
-          description: Unauthorized
         '500':
           description: Server Error
