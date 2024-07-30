@@ -75,7 +75,8 @@ data "aws_iam_policy_document" "delete_scanned_files" {
   version = "2012-10-17"
 
   statement {
-    actions   = ["s3:DeleteObject"]
+    actions = ["s3:DeleteObject"]
+    # tfsec:ignore:aws-iam-no-policy-wildcards - we want to allow deletion of all files
     resources = ["${aws_s3_bucket.scan_files.arn}/files/*"]
   }
 }
