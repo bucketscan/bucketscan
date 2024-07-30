@@ -1,5 +1,5 @@
 "use client";
-import { Navbar } from "./Navbar";
+import { NavbarComponent } from "./Navbar";
 import { ReactNode } from "react";
 import { Metadata } from "next";
 import Footer from "./Footer";
@@ -14,8 +14,7 @@ export const meta: Metadata = {
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <>
-      {/* <Navbar /> */}
-      <Navbar />
+      <NavbarComponent />
       <main id="skip">{children}</main>
       <Toaster />
       {/* <Footer /> */}
