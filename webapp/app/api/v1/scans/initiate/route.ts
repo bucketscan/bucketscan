@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 import { badRequest, HttpResponse, internalServerError, ok } from "@/app/api/responses"
 import trackPendingScan from "./trackPendingScan"
 import uploadFile from "./uploadFile"
-import getAccountId from "./getAccountId"
+import getAccountId from "@/app/api/getAccountId"
 import { isError } from "@/app/api/Result"
 import generateFileReference from "./generateFileReference"
 

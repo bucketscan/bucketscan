@@ -11,6 +11,12 @@ export const internalServerError = <TBody extends HttpResponse = HttpResponse>
     statusText: description
   } as TBody)
 
+export const notFound = <TBody extends HttpResponse = HttpResponse>
+  (description?: string): NextResponse<TBody> => NextResponse.json({
+    status: 404,
+    statusText: description
+  } as TBody)
+
 export const badRequest = <TBody extends HttpResponse = HttpResponse>
   (description?: string): NextResponse<TBody> => NextResponse.json({
     status: 400,
