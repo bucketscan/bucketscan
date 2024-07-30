@@ -1,14 +1,25 @@
 {
   "Comment": "Processes notifications of files that have been scanned by GuardDuty for malware",
-  "StartAt": "DeleteS3Object",
+  "StartAt": "Remove scanned object",
   "States": {
-    "DeleteS3Object": {
+    "Remove scanned object": {
       "Type": "Task",
       "Parameters": {
         "Bucket.$": "$.detail.s3ObjectDetails.bucketName",
         "Key.$": "$.detail.s3ObjectDetails.objectKey"
       },
       "Resource": "arn:aws:states:::aws-sdk:s3:deleteObject",
+      "Next": "Get Supabase credentials"
+    },
+    "Get Supabase credentials": {
+      "Type": "Task",
+      "Parameters": {
+        "Names": [
+          "/bucketscan/supabase/url",
+          "/bucketscan/supabase/anon-key"
+        ]
+      },
+      "Resource": "arn:aws:states:::aws-sdk:ssm:getParameters",
       "End": true
     }
   }

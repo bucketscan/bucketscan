@@ -87,6 +87,25 @@ resource "aws_iam_role_policy" "delete_scanned_files" {
   policy = data.aws_iam_policy_document.delete_scanned_files.json
 }
 
+data "aws_iam_policy_document" "get_supabase_credentials" {
+  version = "2012-10-17"
+
+  statement {
+    actions = ["ssm:GetParameters"]
+
+    resources = [
+      "arn:aws:ssm:${local.region}:${local.account_id}:parameter/bucketscan/supabase/url",
+      "arn:aws:ssm:${local.region}:${local.account_id}:parameter/bucketscan/supabase/anon-key"
+    ]
+  }
+}
+
+resource "aws_iam_role_policy" "get_supabase_credentials" {
+  name   = "bucketscan-get-supabase-credentials"
+  role   = aws_iam_role.handle_scanned_files.id
+  policy = data.aws_iam_policy_document.get_supabase_credentials.json
+}
+
 #################################################################################
 # State Machine
 #################################################################################
