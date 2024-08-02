@@ -74,9 +74,42 @@ resource "aws_iam_role_policy" "get_supabase_credentials" {
   policy = data.aws_iam_policy_document.get_supabase_credentials.json
 }
 
+# IAM: Logging
+# data "aws_iam_policy_document" "handle_scanned_files_logging" {
+#   version = "2012-10-17"
+
+#   statement {
+#     sid = "LogEvents"
+
+#     actions = [
+#       "logs:CreateLogStream",
+#       "logs:PutLogEvents"
+#     ]
+
+#     resources = [
+#       "arn:aws:logs:${local.region}:${local.account_id}:log-group:/aws/lambda/bucketscan-handle-scanned-files:*:log-stream:*"
+#     ]
+#   }
+# }
+
+# resource "aws_iam_role_policy" "handle_scanned_files_logging" {
+#   name   = "bucketscan-handle-scanned-files-logging"
+#   role   = aws_iam_role.handle_scanned_files.id
+#   policy = data.aws_iam_policy_document.handle_scanned_files_logging.json
+# }
+
+resource "aws_iam_role_policy_attachment" "handle_scanned_files_basic_execution_role" {
+  role       = aws_iam_role.handle_scanned_files.id
+  policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+}
+
 #################################################################################
 # Lambda Function
 #################################################################################
+# resource "aws_cloudwatch_log_group" "handle_scanned_files" {
+#   name = "/aws/lambda/bucketscan-handle-scanned-files"
+# }
+
 data "archive_file" "lambda_zip" {
   type        = "zip"
   source_dir  = "${path.module}/../functions/handle-scanned-files/dist"
@@ -93,6 +126,7 @@ resource "aws_lambda_function" "handle_scanned_files" {
   runtime          = "nodejs20.x"
 
   logging_config {
+    # log_group  = aws_cloudwatch_log_group.handle_scanned_files.arn
     log_format = "JSON"
   }
 
