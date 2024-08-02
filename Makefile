@@ -28,6 +28,7 @@ install:
 .PHONY: check
 check:
 	cd webapp; yarn typecheck
+	cd virus-api/functions/handle-scanned-files; yarn typecheck
 
 .PHONY: build
 build:
