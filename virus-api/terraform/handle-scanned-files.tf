@@ -11,7 +11,7 @@ resource "aws_cloudwatch_event_rule" "scan_results" {
   })
 }
 
-data "aws_iam_policy_document" "trigger_handle_scanned_files_workflow" {
+data "aws_iam_policy_document" "trigger_handle_scanned_files" {
   version = "2012-10-17"
 
   statement {
@@ -24,30 +24,30 @@ data "aws_iam_policy_document" "trigger_handle_scanned_files_workflow" {
   }
 }
 
-resource "aws_iam_role" "trigger_handle_scanned_files_workflow" {
-  name               = "bucketscan-trigger-handle-scanned-files-workflow"
-  assume_role_policy = data.aws_iam_policy_document.trigger_handle_scanned_files_workflow.json
+resource "aws_iam_role" "trigger_handle_scanned_files" {
+  name               = "bucketscan-trigger-handle-scanned-files"
+  assume_role_policy = data.aws_iam_policy_document.trigger_handle_scanned_files.json
 }
 
-data "aws_iam_policy_document" "trigger_handle_scanned_files_workflow_permission" {
+data "aws_iam_policy_document" "trigger_handle_scanned_files_permission" {
   version = "2012-10-17"
 
   statement {
-    actions   = ["states:StartExecution"]
-    resources = [aws_sfn_state_machine.handle_scanned_files.arn]
+    actions   = ["lambda:InvokeFunction"]
+    resources = [aws_lambda_function.handle_scanned_files.arn]
   }
 }
 
-resource "aws_iam_role_policy" "trigger_handle_scanned_files_workflow_permission" {
-  name   = "bucketscan-trigger-handle-scanned-files-workflow"
-  role   = aws_iam_role.trigger_handle_scanned_files_workflow.id
-  policy = data.aws_iam_policy_document.trigger_handle_scanned_files_workflow_permission.json
+resource "aws_iam_role_policy" "trigger_handle_scanned_files_permission" {
+  name   = "bucketscan-trigger-handle-scanned-files"
+  role   = aws_iam_role.trigger_handle_scanned_files.id
+  policy = data.aws_iam_policy_document.trigger_handle_scanned_files_permission.json
 }
 
 resource "aws_cloudwatch_event_target" "handle_scanned_files" {
   rule     = aws_cloudwatch_event_rule.scan_results.name
-  arn      = aws_sfn_state_machine.handle_scanned_files.arn
-  role_arn = aws_iam_role.trigger_handle_scanned_files_workflow.arn
+  arn      = aws_lambda_function.handle_scanned_files.arn
+  role_arn = aws_iam_role.trigger_handle_scanned_files.arn
 }
 
 #################################################################################
@@ -61,7 +61,7 @@ data "aws_iam_policy_document" "handle_scanned_files" {
 
     principals {
       type        = "Service"
-      identifiers = ["states.amazonaws.com"]
+      identifiers = ["lambda.amazonaws.com"]
     }
   }
 }
@@ -107,10 +107,20 @@ resource "aws_iam_role_policy" "get_supabase_credentials" {
 }
 
 #################################################################################
-# State Machine
+# Lambda Function
 #################################################################################
-resource "aws_sfn_state_machine" "handle_scanned_files" {
-  name       = "bucketscan-handle-scanned-files"
-  definition = file("${path.module}/handle-scanned-files.json")
-  role_arn   = aws_iam_role.handle_scanned_files.arn
+data "archive_file" "lambda_zip" {
+  type        = "zip"
+  source_dir  = "${path.module}/../functions/handle-scanned-files/dist"
+  output_path = "${path.module}/handle-scanned-files.zip"
+}
+
+resource "aws_lambda_function" "handle_scanned_files" {
+  function_name    = "bucketscan-handle-scanned-files"
+  role             = aws_iam_role.handle_scanned_files.arn
+  handler          = "index.default"
+  filename         = data.archive_file.lambda_zip.output_path
+  source_code_hash = data.archive_file.lambda_zip.output_base64sha256
+  timeout          = 30
+  runtime          = "nodejs20.x"
 }
