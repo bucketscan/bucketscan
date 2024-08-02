@@ -11,43 +11,9 @@ resource "aws_cloudwatch_event_rule" "scan_results" {
   })
 }
 
-data "aws_iam_policy_document" "trigger_handle_scanned_files" {
-  version = "2012-10-17"
-
-  statement {
-    actions = ["sts:AssumeRole"]
-
-    principals {
-      type        = "Service"
-      identifiers = ["events.amazonaws.com"]
-    }
-  }
-}
-
-resource "aws_iam_role" "trigger_handle_scanned_files" {
-  name               = "bucketscan-trigger-handle-scanned-files"
-  assume_role_policy = data.aws_iam_policy_document.trigger_handle_scanned_files.json
-}
-
-data "aws_iam_policy_document" "trigger_handle_scanned_files_permission" {
-  version = "2012-10-17"
-
-  statement {
-    actions   = ["lambda:InvokeFunction"]
-    resources = [aws_lambda_function.handle_scanned_files.arn]
-  }
-}
-
-resource "aws_iam_role_policy" "trigger_handle_scanned_files_permission" {
-  name   = "bucketscan-trigger-handle-scanned-files"
-  role   = aws_iam_role.trigger_handle_scanned_files.id
-  policy = data.aws_iam_policy_document.trigger_handle_scanned_files_permission.json
-}
-
 resource "aws_cloudwatch_event_target" "handle_scanned_files" {
-  rule     = aws_cloudwatch_event_rule.scan_results.name
-  arn      = aws_lambda_function.handle_scanned_files.arn
-  role_arn = aws_iam_role.trigger_handle_scanned_files.arn
+  rule = aws_cloudwatch_event_rule.scan_results.name
+  arn  = aws_lambda_function.handle_scanned_files.arn
 }
 
 #################################################################################
@@ -71,6 +37,7 @@ resource "aws_iam_role" "handle_scanned_files" {
   assume_role_policy = data.aws_iam_policy_document.handle_scanned_files.json
 }
 
+# IAM: Delete Scanned Files
 data "aws_iam_policy_document" "delete_scanned_files" {
   version = "2012-10-17"
 
@@ -87,6 +54,7 @@ resource "aws_iam_role_policy" "delete_scanned_files" {
   policy = data.aws_iam_policy_document.delete_scanned_files.json
 }
 
+# IAM: Get Supabase Credentials
 data "aws_iam_policy_document" "get_supabase_credentials" {
   version = "2012-10-17"
 
@@ -123,4 +91,12 @@ resource "aws_lambda_function" "handle_scanned_files" {
   source_code_hash = data.archive_file.lambda_zip.output_base64sha256
   timeout          = 30
   runtime          = "nodejs20.x"
+
+  logging_config {
+    log_format = "JSON"
+  }
+
+  tracing_config {
+    mode = "Active"
+  }
 }
