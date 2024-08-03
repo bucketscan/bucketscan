@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "workspaces": [
+    "@bucketscan/utils",
+    "virus-api/functions/*"
+  ],
+  "packageManager": "yarn@4.4.0",
+  "devDependencies": {
+    "rimraf": "^6.0.1"
+  }
+}

@@ -1,7 +1,6 @@
-# dependencies
+# Package Manager
 node_modules
-
-# output
+.yarn
 dist
 **/*.zip
 

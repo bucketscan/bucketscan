@@ -1,3 +1,6 @@
+import { isError } from "@bucketscan/utils"
+import deleteFile from "./deleteFile"
+
 /**
  * Sample payload:
  *
@@ -44,11 +47,17 @@ type GuardDutyMalwareProtectionObjectScanResultEvent = {
   }
 }
 
-
 export default async function (
   event: GuardDutyMalwareProtectionObjectScanResultEvent
 ) {
   console.log(event)
 
-  return await Promise.resolve()
+  const { bucketName, objectKey } = event.detail.s3ObjectDetails
+
+  const deleteFileResult = await deleteFile(bucketName, objectKey)
+  if (isError(deleteFileResult)) {
+    console.error(JSON.stringify(deleteFileResult))
+
+    throw deleteFileResult
+  }
 }
