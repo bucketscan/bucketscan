@@ -16,5 +16,8 @@
     "clean": "rimraf dist node_modules",
     "build": "tsc",
     "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@smithy/types": "^3.3.0"
   }
 }
