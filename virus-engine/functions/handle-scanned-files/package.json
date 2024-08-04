@@ -18,6 +18,7 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "build": "webpack --config webpack.config.js --mode production"
+    "build": "webpack --config webpack.config.js --mode production",
+    "typecheck": "tsc --noEmit"
   }
 }

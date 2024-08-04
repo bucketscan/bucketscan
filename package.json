@@ -2,7 +2,8 @@
   "private": true,
   "workspaces": [
     "@bucketscan/utils",
-    "virus-api/functions/*"
+    "virus-engine/functions/*",
+    "webapp"
   ],
   "packageManager": "yarn@4.4.0",
   "devDependencies": {

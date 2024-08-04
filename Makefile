@@ -5,7 +5,7 @@ SHELL := /bin/bash
 ###################################################################
 .PHONY: validate-terraform
 validate-terraform:
-	tfsec virus-api/terraform
+	tfsec virus-engine/terraform
 
 ###################################################################
 # Modular commands
@@ -23,16 +23,15 @@ init:
 
 .PHONY: install
 install:
-	scripts/install.sh
+	yarn install
 
 .PHONY: check
 check:
-	cd webapp; yarn typecheck
-	cd virus-api/functions/handle-scanned-files; yarn typecheck
+	yarn workspaces foreach -A run typecheck
 
 .PHONY: build
 build:
-	scripts/build.sh
+	yarn workspaces foreach -A run build
 
 .PHONY: start-backend
 start-backend:
@@ -61,4 +60,4 @@ teardown: stop-backend clean
 
 .PHONY: deploy
 deploy:
-	cd virus-api/terraform; terragrunt apply --auto-approve --terragrunt-non-interactive
+	cd virus-engine/terraform; terragrunt apply --auto-approve --terragrunt-non-interactive
