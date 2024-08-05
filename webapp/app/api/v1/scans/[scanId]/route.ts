@@ -1,50 +1,58 @@
 import { NextRequest, NextResponse } from "next/server"
 import { isError } from "@bucketscan/utils"
 import { ScanResult } from "@bucketscan/supabase"
-import { badRequest, HttpResponse, internalServerError, notFound, ok } from "@/app/api/responses"
+import {
+  badRequest,
+  HttpResponse,
+  internalServerError,
+  notFound,
+  ok
+} from "@/app/api/responses"
 import getAccountId from "@/app/api/getAccountId"
 import { supabaseClient } from "@/app/api/supabaseClient"
 
 type GetScanByIdRequest = {
   params: {
-    scanId: string
-  }
-}
+    scanId: string;
+  };
+};
 
 type GetScanByIdResult = {
-  scanId: string
-  result: ScanResult
-}
+  scanId: string;
+  result: ScanResult;
+};
 
-export async function GET(request: NextRequest, { params }: GetScanByIdRequest): Promise<NextResponse<HttpResponse | GetScanByIdResult>> {
-
-  const accountId = getAccountId(request)
+export async function GET(
+  request: NextRequest,
+  { params }: GetScanByIdRequest,
+): Promise<NextResponse<HttpResponse | GetScanByIdResult>> {
+  const accountId = getAccountId(request);
   if (isError(accountId)) {
-    return badRequest(accountId.message)
+    return badRequest(accountId.message);
   }
 
-  const { scanId } = params
+  const { scanId } = params;
   if (!scanId) {
-    return badRequest("Missing scanId from URL")
+    return badRequest("Missing scanId from URL");
   }
 
   const { data, error } = await supabaseClient
-    .from('scans')
+    .from("scans")
     .select()
     .eq("id", scanId)
-    .single()
+    .single();
 
   if (error) {
-    console.error(JSON.stringify(error))
-    return internalServerError(error.message)
+    console.error(JSON.stringify(error));
+    return internalServerError(error.message);
   }
 
   if (!data) {
-    return notFound(`No scan record was found with Id ${scanId}`)
+    return notFound(`No scan record was found with Id ${scanId}`);
   }
 
   return ok("OK", {
     scanId,
-    scanResult: data.result
-  })
+    scanResult: data.result,
+  });
 }

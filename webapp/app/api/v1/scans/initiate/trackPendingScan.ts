@@ -1,7 +1,7 @@
 import { Result } from "@bucketscan/utils"
 import { supabaseClient } from "@/app/api/supabaseClient"
 
-export type ScanId = string
+export type ScanId = string;
 
 export default async (accountId: string, objectKey: string): Promise<Result<ScanId>> => {
   const { data, error } = await supabaseClient
@@ -9,14 +9,14 @@ export default async (accountId: string, objectKey: string): Promise<Result<Scan
     .insert({
       account_id: accountId,
       file_reference: objectKey,
-      result: "pending"
+      result: "pending",
     })
     .select()
-    .single()
+    .single();
 
   if (error) {
-    return new Error(error.message)
+    return new Error(error.message);
   }
 
-  return data.id
-}
+  return data.id;
+};

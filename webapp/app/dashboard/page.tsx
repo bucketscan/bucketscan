@@ -1,24 +1,30 @@
-import { Button, Card, CardBody, CardHeader, Progress } from "@nextui-org/react"
-import { redirect } from "next/navigation"
-import { supabaseClient } from "@/app/api/supabaseClient"
+import { LabelWithCopy } from "@/components/label-with-copy";
+import { createClient } from "@/utils/supabase/server";
 
-export default async function Page() {
-  const { data, error } = await supabaseClient.auth.getUser()
+import {
+  Card,
+  CardBody,
+  CardHeader,
+  Progress,
+} from "@nextui-org/react";
+import { redirect } from "next/navigation";
+
+export default async function Dashboard() {
+  const supabase = createClient();
+  const { data, error } = await supabase.auth.getUser();
   if (error || !data?.user) {
-    redirect('/')
+    redirect("/login");
   }
-
-  console.log(data)
-
+  const { data: personalAccount } = await supabase.rpc("get_personal_account");
+  console.log(personalAccount);
   return (
     <>
       <Card>
         <CardHeader>
-          <h1>Welcome to BucketScan</h1>
-          <h2>To get started please create your first API key</h2>
+          <h2>API Key</h2>
         </CardHeader>
         <CardBody>
-          <Button href='/teams/${teamid}/edit'>Create API Key</Button>
+          <LabelWithCopy text={personalAccount.private_metadata.api_key} />
         </CardBody>
       </Card>
       <Card>
@@ -35,5 +41,5 @@ export default async function Page() {
         </CardBody>
       </Card>
     </>
-  )
+  );
 }
