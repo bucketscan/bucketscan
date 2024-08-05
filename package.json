@@ -1,7 +1,7 @@
 {
   "private": true,
   "workspaces": [
-    "@bucketscan/utils",
+    "@bucketscan/*",
     "virus-engine/functions/*",
     "webapp"
   ],

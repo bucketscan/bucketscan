@@ -738,6 +738,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@bucketscan/supabase@npm:1.0.0, @bucketscan/supabase@workspace:@bucketscan/supabase":
+  version: 0.0.0-use.local
+  resolution: "@bucketscan/supabase@workspace:@bucketscan/supabase"
+  dependencies:
+    "@types/node": "npm:^20.9.4"
+    rimraf: "npm:^6.0.1"
+    typescript: "npm:^5.3.3"
+  languageName: unknown
+  linkType: soft
+
 "@bucketscan/utils@npm:1.0.0, @bucketscan/utils@workspace:@bucketscan/utils":
   version: 0.0.0-use.local
   resolution: "@bucketscan/utils@workspace:@bucketscan/utils"
@@ -6797,6 +6807,7 @@ __metadata:
   resolution: "handle-scanned-files@workspace:virus-engine/functions/handle-scanned-files"
   dependencies:
     "@aws-sdk/client-s3": "npm:^3.623.0"
+    "@bucketscan/supabase": "npm:1.0.0"
     "@bucketscan/utils": "npm:1.0.0"
     "@types/aws-lambda": "npm:^8.10.129"
     "@types/node": "npm:^20.9.4"

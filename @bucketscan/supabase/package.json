@@ -1,0 +1,20 @@
+{
+  "name": "@bucketscan/supabase",
+  "version": "1.0.0",
+  "description": "Generated types for the Supabase database that backs BucketScan",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "devDependencies": {
+    "@types/node": "^20.9.4",
+    "rimraf": "^6.0.1",
+    "typescript": "^5.3.3"
+  },
+  "scripts": {
+    "clean": "rimraf dist node_modules",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  }
+}

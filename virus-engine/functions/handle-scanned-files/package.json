@@ -15,6 +15,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "@bucketscan/supabase": "1.0.0",
     "@bucketscan/utils": "1.0.0"
   },
   "scripts": {
