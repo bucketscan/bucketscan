@@ -1,7 +1,7 @@
 'use client';
 
 import { getURL } from '@/utils/helpers';
-import { createSupabaseClient } from '@/utils/supabaseClient';
+import { supabaseClient } from "@/app/api/supabaseClient"
 import { useUser } from '@supabase/auth-helpers-react';
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
@@ -26,7 +26,7 @@ export default function Page() {
           </div>
           <div className="flex flex-col space-y-4 h-full">
             <Auth
-              supabaseClient={createSupabaseClient()}
+              supabaseClient={supabaseClient}
               view="sign_in"
               providers={['google', 'github']}
               redirectTo={`http://localhost:3000/auth/callback`}

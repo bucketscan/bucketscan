@@ -1,5 +1,5 @@
 import { NextRequest } from "next/server"
-import { Result } from "@/app/api/Result"
+import { Result } from "@bucketscan/utils"
 
 // TODO: We should be accepting an API Key, which will be used
 // to authenticate the caller, but also to lookup their account Id.

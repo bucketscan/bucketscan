@@ -1,12 +1,9 @@
 import { NextRequest, NextResponse } from "next/server"
+import { isError } from "@bucketscan/utils"
+import { ScanResult } from "@bucketscan/supabase"
 import { badRequest, HttpResponse, internalServerError, notFound, ok } from "@/app/api/responses"
 import getAccountId from "@/app/api/getAccountId"
-import { isError } from "@/app/api/Result"
-import { createSupabaseClient } from "@/utils/supabaseClient"
-
-const supabase = createSupabaseClient()
-
-type ScanResult = "pending" | "complete_clean" | "complete_infected" | "failed"
+import { supabaseClient } from "@/app/api/supabaseClient"
 
 type GetScanByIdRequest = {
   params: {
@@ -31,7 +28,7 @@ export async function GET(request: NextRequest, { params }: GetScanByIdRequest):
     return badRequest("Missing scanId from URL")
   }
 
-  const { data, error } = await supabase
+  const { data, error } = await supabaseClient
     .from('scans')
     .select()
     .eq("id", scanId)
