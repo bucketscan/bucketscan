@@ -1,5 +1,6 @@
 import { createSupabaseClient, ScanResult } from "@bucketscan/supabase"
-import { Result } from "@bucketscan/utils"
+import { isError, Result } from "@bucketscan/utils"
+import getClientConfig from "./getClientConfig"
 
 // Possible values taken from docs
 // See: https://docs.aws.amazon.com/guardduty/latest/ug/how-malware-protection-for-s3-gdu-works.html#enable-optional-tagging-malware-protection-s3
@@ -21,13 +22,16 @@ const convertScanResult = (scanResult: string): ScanResult => {
   return result
 }
 
-const client = createSupabaseClient({
-  supabaseUrl: "TODO: Get from param store",
-  supabaseAnonKey: "TODO: Get from param store"
-})
-
 export default async (scanId: string, scanResult: string): Promise<Result<void>> => {
   const actualScanResult = convertScanResult(scanResult)
+
+  const config = await getClientConfig()
+  if (isError(config)) {
+    console.error(JSON.stringify(config))
+    return config
+  }
+
+  const client = createSupabaseClient(config)
 
   const { error } = await client
     .from('scans')
