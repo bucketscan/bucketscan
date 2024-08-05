@@ -20,6 +20,11 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
+      # Now we're using Yarn 4, we need to enable corepack to manage package installation
+      - name: Enable Corepack
+        shell: bash
+        run: corepack enable
+
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
