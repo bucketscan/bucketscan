@@ -12,35 +12,59 @@ import {
 import { redirect } from "next/navigation";
 import { startSubscription } from "@/app/pricing/page";
 
-const PricingCardsContent = ({ plans, accountId }) => (
+const PricingCardsContent = ({
+  plans,
+  accountId,
+}: {
+  plans: any;
+  accountId: string;
+}) => (
   <>
-    {plans.map(({ currency, id, interval, price, product_name }) => (
-      <Card key={id}>
-        <CardHeader>{product_name}</CardHeader>
-        <CardBody>
-          £{price / 100} {currency.toUpperCase()}
-          <Button
-            onClick={async () => {
-              if (accountId) {
-                await startSubscription(accountId, id); // Call the server action
-              } else {
-                redirect("/login");
-              }
-            }}
-          >
-            Subscribe
-          </Button>
-        </CardBody>
-      </Card>
-    ))}
+    {plans.map(
+      ({
+        currency,
+        id,
+        price,
+        product_name,
+      }: {
+        currency: string;
+        id: any;
+        price: number;
+        product_name: string;
+      }) => (
+        <Card key={id}>
+          <CardHeader>{product_name}</CardHeader>
+          <CardBody>
+            £{price / 100} {currency.toUpperCase()}
+            <Button
+              onClick={async () => {
+                if (accountId) {
+                  await startSubscription(accountId, id); // Call the server action
+                } else {
+                  redirect("/login");
+                }
+              }}
+            >
+              Subscribe
+            </Button>
+          </CardBody>
+        </Card>
+      )
+    )}
   </>
 );
 
-export const PricingCards = ({ pricingPlans, accountId }) => {
+export const PricingCards = ({
+  pricingPlans,
+  accountId,
+}: {
+  pricingPlans: Array<any>;
+  accountId: string;
+}) => {
   const [selectedTab, setSelectedTab] = useState("monthly");
 
   const monthlyPlans = pricingPlans?.filter(
-    (plan) => plan.interval === "month",
+    (plan) => plan.interval === "month"
   );
   const yearlyPlans = pricingPlans?.filter((plan) => plan.interval === "year");
 
@@ -50,8 +74,10 @@ export const PricingCards = ({ pricingPlans, accountId }) => {
         <>
           <Tabs
             aria-label="Pricing Plans"
-            defaultValue="monthly"
-            onSelectionChange={(key) => setSelectedTab(key)}
+            defaultSelectedKey="monthly"
+            onSelectionChange={(key: React.Key) =>
+              setSelectedTab(key.toString())
+            }
           >
             <Tab key="monthly" title="Monthly">
               {selectedTab === "monthly" && (

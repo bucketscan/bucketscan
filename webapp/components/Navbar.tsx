@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { BasejumpUserSession, SignedIn, SignedOut } from "@usebasejump/next";
-import UserProfileButton from "./basejump/UserAccountButton";
 import {
   Navbar,
   NavbarBrand,
@@ -13,6 +12,7 @@ import {
   Button,
 } from "@nextui-org/react";
 import React from "react";
+import LogoutButton from "./Logout";
 
 export const NavbarComponent = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -44,7 +44,11 @@ export const NavbarComponent = () => {
         <NavbarItem>
           <BasejumpUserSession>
             <SignedIn>
-              <UserProfileButton />
+              Hello! <br />
+              <p>
+                <Link href="/dashboard">Dashboard</Link>
+              </p>
+              <LogoutButton />
             </SignedIn>
             <SignedOut>
               <Link href="/login">Login</Link>
@@ -60,8 +64,8 @@ export const NavbarComponent = () => {
                 index === 2
                   ? "primary"
                   : index === menuItems.length - 1
-                    ? "danger"
-                    : "foreground"
+                  ? "danger"
+                  : "foreground"
               }
               className="w-full"
               href="#"
