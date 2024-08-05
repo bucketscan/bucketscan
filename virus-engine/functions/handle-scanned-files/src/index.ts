@@ -1,5 +1,6 @@
 import { isError } from "@bucketscan/utils"
 import deleteFile from "./deleteFile"
+import updateScanResult from "./updateScanResult"
 
 /**
  * Sample payload:
@@ -53,6 +54,14 @@ export default async function (
   console.log(event)
 
   const { bucketName, objectKey } = event.detail.s3ObjectDetails
+  const { scanResultStatus } = event.detail.scanResultDetails
+
+  const updateScanResultResult = await updateScanResult(objectKey, scanResultStatus)
+  if (isError(updateScanResultResult)) {
+    console.error(JSON.stringify(updateScanResultResult))
+
+    throw updateScanResultResult
+  }
 
   const deleteFileResult = await deleteFile(bucketName, objectKey)
   if (isError(deleteFileResult)) {
