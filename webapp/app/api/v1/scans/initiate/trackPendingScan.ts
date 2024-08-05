@@ -1,24 +1,27 @@
-import { createSupabaseClient } from "@/utils/supabaseClient"
-import { Result } from "@/app/api/Result"
+import { createClient } from "@/utils/supabase/client";
+import { Result } from "@/app/api/Result";
 
-const supabase = createSupabaseClient()
+const supabase = createClient();
 
-export type ScanId = string
+export type ScanId = string;
 
-export default async (accountId: string, objectKey: string): Promise<Result<ScanId>> => {
+export default async (
+  accountId: string,
+  objectKey: string,
+): Promise<Result<ScanId>> => {
   const { data, error } = await supabase
-    .from('scans')
+    .from("scans")
     .insert({
       account_id: accountId,
       file_reference: objectKey,
-      result: "pending"
+      result: "pending",
     })
     .select()
-    .single()
+    .single();
 
   if (error) {
-    return new Error(error.message)
+    return new Error(error.message);
   }
 
-  return data.id
-}
+  return data.id;
+};

@@ -1,40 +1,46 @@
-import { createSupabaseClient } from "@/utils/supabaseClient";
-import { Button, Card, CardBody, CardHeader, Progress } from "@nextui-org/react";
+import { LabelWithCopy } from "@/components/label-with-copy";
+import { createClient } from "@/utils/supabase/server";
+
+import {
+  Button,
+  Card,
+  CardBody,
+  CardHeader,
+  Progress,
+} from "@nextui-org/react";
 import { redirect } from "next/navigation";
 
-export default async function Page() {
-  const supabase = createSupabaseClient();
-  const { data, error } = await supabase.auth.getUser()
+export default async function Dashboard() {
+  const supabase = createClient();
+  const { data, error } = await supabase.auth.getUser();
   if (error || !data?.user) {
-    redirect('/')
+    redirect("/login");
   }
-
-  console.log(data)
-
+  const { data: personalAccount } = await supabase.rpc("get_personal_account");
+  console.log(personalAccount);
   return (
     <>
-    <Card>
-      <CardHeader>
-        <h1>Welcome to BucketScan</h1>
-        <h2>To get started please create your first API key</h2>
-      </CardHeader>
-      <CardBody>
-        <Button href='/teams/${teamid}/edit'>Create API Key</Button>
-      </CardBody>
-    </Card>
-    <Card>
-      <CardHeader>
-        <div>
-          <h2>API Credits</h2>
-        </div>
-        <div>
-          <p>0 of 100 - 0% of quota used</p>
-        </div>
-      </CardHeader>
-      <CardBody>
-        <Progress aria-label="API Credits" value={60} className="max-w-md"/>
-      </CardBody>
-    </Card>
+      <Card>
+        <CardHeader>
+          <h2>API Key</h2>
+        </CardHeader>
+        <CardBody>
+          <LabelWithCopy text={personalAccount.private_metadata.api_key} />
+        </CardBody>
+      </Card>
+      <Card>
+        <CardHeader>
+          <div>
+            <h2>API Credits</h2>
+          </div>
+          <div>
+            <p>0 of 100 - 0% of quota used</p>
+          </div>
+        </CardHeader>
+        <CardBody>
+          <Progress aria-label="API Credits" value={60} className="max-w-md" />
+        </CardBody>
+      </Card>
     </>
-  )
+  );
 }
