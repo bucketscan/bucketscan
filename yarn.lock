@@ -4372,6 +4372,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/rollup-linux-x64-gnu@npm:^4.9.5":
+  version: 4.20.0
+  resolution: "@rollup/rollup-linux-x64-gnu@npm:4.20.0"
+  conditions: os=linux & cpu=x64 & libc=glibc
+  languageName: node
+  linkType: hard
+
 "@smithy/abort-controller@npm:^3.1.1":
   version: 3.1.1
   resolution: "@smithy/abort-controller@npm:3.1.1"
@@ -5077,15 +5084,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/ssr@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@supabase/ssr@npm:0.1.0"
+"@supabase/ssr@npm:^0.4.0":
+  version: 0.4.1
+  resolution: "@supabase/ssr@npm:0.4.1"
   dependencies:
-    cookie: "npm:^0.5.0"
-    ramda: "npm:^0.29.0"
+    "@rollup/rollup-linux-x64-gnu": "npm:^4.9.5"
+    cookie: "npm:^0.6.0"
   peerDependencies:
-    "@supabase/supabase-js": ^2.33.1
-  checksum: 10c0/1ae3459cbdd06af01475dbeca7375dc2d5ac5e6534244ddfcc1fbdaae90af766a86fdc7ed660b9f205a9802265f0f04baeaab8801fd4d7cf1e74dc5218325bae
+    "@supabase/supabase-js": ^2.43.4
+  dependenciesMeta:
+    "@rollup/rollup-linux-x64-gnu":
+      optional: true
+  checksum: 10c0/cb407ef5ae8edad5a4174689b5e735e5be953c3891ed535c3812b319a13d5acacc52e3e08457c2e5bb207a3bfe93e17d9187ef983a0b567a51ecccdb268a1e05
   languageName: node
   linkType: hard
 
@@ -5098,7 +5108,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/supabase-js@npm:^2.39.3, @supabase/supabase-js@npm:^2.45.0":
+"@supabase/supabase-js@npm:^2.44.0, @supabase/supabase-js@npm:^2.45.0":
   version: 2.45.0
   resolution: "@supabase/supabase-js@npm:2.45.0"
   dependencies:
@@ -6162,10 +6172,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cookie@npm:^0.5.0":
-  version: 0.5.0
-  resolution: "cookie@npm:0.5.0"
-  checksum: 10c0/c01ca3ef8d7b8187bae434434582288681273b5a9ed27521d4d7f9f7928fe0c920df0decd9f9d3bbd2d14ac432b8c8cf42b98b3bdd5bfe0e6edddeebebe8b61d
+"cookie@npm:^0.6.0":
+  version: 0.6.0
+  resolution: "cookie@npm:0.6.0"
+  checksum: 10c0/f2318b31af7a31b4ddb4a678d024514df5e705f9be5909a192d7f116cfb6d45cbacf96a473fa733faa95050e7cff26e7832bb3ef94751592f1387b71c8956686
   languageName: node
   linkType: hard
 
@@ -6811,6 +6821,15 @@ __metadata:
   bin:
     glob: dist/esm/bin.mjs
   checksum: 10c0/419866015d8795258a8ac51de5b9d1a99c72634fc3ead93338e4da388e89773ab21681e494eac0fbc4250b003451ca3110bb4f1c9393d15d14466270094fdb4e
+  languageName: node
+  linkType: hard
+
+"goober@npm:^2.1.10":
+  version: 2.1.14
+  resolution: "goober@npm:2.1.14"
+  peerDependencies:
+    csstype: ^3.0.10
+  checksum: 10c0/184eda787a9a14cffbaa8284e98dc127095e538b4acab2a84b81babca84253bb883e16208822e02584f27c7a69f3ec47341e5060dfa40a0e07c32ac1f79b2714
   languageName: node
   linkType: hard
 
@@ -9210,13 +9229,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ramda@npm:^0.29.0":
-  version: 0.29.1
-  resolution: "ramda@npm:0.29.1"
-  checksum: 10c0/5de53a07400959c1a704c366ec52b1b8cd9a444dc1f9cdf17d607e0b9eeaa38cbaea309d43e59dbd7f36731ba977a64d40092555c0e7c2d4a41e8e922239c0ba
-  languageName: node
-  linkType: hard
-
 "randombytes@npm:^2.1.0":
   version: 2.1.0
   resolution: "randombytes@npm:2.1.0"
@@ -9235,6 +9247,18 @@ __metadata:
   peerDependencies:
     react: ^18.3.1
   checksum: 10c0/a752496c1941f958f2e8ac56239172296fcddce1365ce45222d04a1947e0cc5547df3e8447f855a81d6d39f008d7c32eab43db3712077f09e3f67c4874973e85
+  languageName: node
+  linkType: hard
+
+"react-hot-toast@npm:^2.4.1":
+  version: 2.4.1
+  resolution: "react-hot-toast@npm:2.4.1"
+  dependencies:
+    goober: "npm:^2.1.10"
+  peerDependencies:
+    react: ">=16"
+    react-dom: ">=16"
+  checksum: 10c0/591ecec3c6adc1cdb70f00165a57baa3d7f75d0d30fa767213c36496bdcc6be2b2e6a3edbf7c04f7d726a1b17dcfb5e7feb2136b04b17c9ccb769894b970f365
   languageName: node
   linkType: hard
 
@@ -10561,8 +10585,8 @@ __metadata:
     "@supabase/auth-helpers-react": "npm:^0.4.2"
     "@supabase/auth-ui-react": "npm:^0.4.7"
     "@supabase/auth-ui-shared": "npm:^0.1.8"
-    "@supabase/ssr": "npm:^0.1.0"
-    "@supabase/supabase-js": "npm:^2.39.3"
+    "@supabase/ssr": "npm:^0.4.0"
+    "@supabase/supabase-js": "npm:^2.44.0"
     "@tailwindcss/forms": "npm:^0.5.7"
     "@types/mdx": "npm:^2.0.11"
     "@types/node": "npm:^20"
@@ -10577,6 +10601,7 @@ __metadata:
     postcss: "npm:^8.4.33"
     react: "npm:^18"
     react-dom: "npm:^18"
+    react-hot-toast: "npm:^2.4.1"
     tailwindcss: "npm:^3.4.1"
     typescript: "npm:^5"
   languageName: unknown
