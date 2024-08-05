@@ -12,17 +12,19 @@ if (!supabaseUrlParameterName || !supabaseAnonKeyParameterName) {
   throw new Error("Missing one or both environment variables: SUPABASE_URL_PARAMETER_NAME, SUPABASE_ANON_KEY_PARAMETER_NAME")
 }
 
-const { region, accessKeyId, secretAccessKey } = config
+const { region, accessKeyId, secretAccessKey, sessionToken } = config
 
 const client = new SSMClient({
   region,
   credentials: {
     accessKeyId,
-    secretAccessKey
+    secretAccessKey,
+    sessionToken
   }
 })
 
 export default async (): Promise<Result<ClientConfig>> => {
+  console.log("Retrieving client credentials...")
 
   const {
     $metadata: metadata,
@@ -32,7 +34,8 @@ export default async (): Promise<Result<ClientConfig>> => {
     Names: [
       supabaseUrlParameterName,
       supabaseAnonKeyParameterName
-    ]
+    ],
+    WithDecryption: true
   }))
 
   if (!isResponseMetadataSuccess(metadata)) {

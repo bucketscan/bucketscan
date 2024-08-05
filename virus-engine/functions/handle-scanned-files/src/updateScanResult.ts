@@ -22,7 +22,7 @@ const convertScanResult = (scanResult: string): ScanResult => {
   return result
 }
 
-export default async (scanId: string, scanResult: string): Promise<Result<void>> => {
+export default async (reference: string, scanResult: string): Promise<Result<void>> => {
   const actualScanResult = convertScanResult(scanResult)
 
   const config = await getClientConfig()
@@ -31,15 +31,16 @@ export default async (scanId: string, scanResult: string): Promise<Result<void>>
     return config
   }
 
+  console.log("Creating Supabase client...")
   const client = createSupabaseClient(config)
 
+  console.log(`Updating scan result with reference ${reference}...`)
   const { error } = await client
-    .from('scans')
+    .from("scans")
     .update({
       result: actualScanResult
     })
-    .eq("id", scanId)
-    .single()
+    .eq("file_reference", reference)
 
   if (error) {
     console.error(JSON.stringify(error))

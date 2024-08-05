@@ -56,17 +56,17 @@ export default async function (
   const { bucketName, objectKey } = event.detail.s3ObjectDetails
   const { scanResultStatus } = event.detail.scanResultDetails
 
-  const updateScanResultResult = await updateScanResult(objectKey, scanResultStatus)
-  if (isError(updateScanResultResult)) {
-    console.error(JSON.stringify(updateScanResultResult))
-
-    throw updateScanResultResult
-  }
-
   const deleteFileResult = await deleteFile(bucketName, objectKey)
   if (isError(deleteFileResult)) {
     console.error(JSON.stringify(deleteFileResult))
 
     throw deleteFileResult
+  }
+
+  const updateScanResultResult = await updateScanResult(objectKey, scanResultStatus)
+  if (isError(updateScanResultResult)) {
+    console.error(JSON.stringify(updateScanResultResult))
+
+    throw updateScanResultResult
   }
 }
