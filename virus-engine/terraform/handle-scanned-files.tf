@@ -111,4 +111,11 @@ resource "aws_lambda_function" "handle_scanned_files" {
   tracing_config {
     mode = "Active"
   }
+
+  environment {
+    variables = {
+      SUPABASE_URL_PARAMETER_NAME      = aws_ssm_parameter.supabase_url.name
+      SUPABASE_ANON_KEY_PARAMETER_NAME = aws_ssm_parameter.supabase_anon_key.name
+    }
+  }
 }
