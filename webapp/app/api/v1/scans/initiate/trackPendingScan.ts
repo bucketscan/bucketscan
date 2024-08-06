@@ -1,15 +1,10 @@
-import { createClient } from "@/utils/supabase/client";
-import { Result } from "@/app/api/Result";
-
-const supabase = createClient();
+import { Result } from "@bucketscan/utils"
+import { supabaseClient } from "@/app/api/supabaseClient"
 
 export type ScanId = string;
 
-export default async (
-  accountId: string,
-  objectKey: string,
-): Promise<Result<ScanId>> => {
-  const { data, error } = await supabase
+export default async (accountId: string, objectKey: string): Promise<Result<ScanId>> => {
+  const { data, error } = await supabaseClient
     .from("scans")
     .insert({
       account_id: accountId,

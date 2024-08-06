@@ -2,7 +2,6 @@ import { LabelWithCopy } from "@/components/label-with-copy";
 import { createClient } from "@/utils/supabase/server";
 
 import {
-  Button,
   Card,
   CardBody,
   CardHeader,

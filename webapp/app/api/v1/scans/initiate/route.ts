@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server"
+import { isError } from "@bucketscan/utils"
 import { badRequest, HttpResponse, internalServerError, ok } from "@/app/api/responses"
 import trackPendingScan from "./trackPendingScan"
 import uploadFile from "./uploadFile"
 import getAccountId from "@/app/api/getAccountId"
-import { isError } from "@/app/api/Result"
 import generateFileReference from "./generateFileReference"
 
 type InitiateScanResult = {

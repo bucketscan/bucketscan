@@ -1,5 +1,8 @@
-# dependencies
+# Package Manager
 node_modules
+.yarn
+dist
+**/*.zip
 
 # opennext
 .open-next
