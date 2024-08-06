@@ -1,11 +1,12 @@
+import { ManageBillingButton } from "@/components/ManageBillingButton";
 import { LabelWithCopy } from "@/components/label-with-copy";
 import { createClient } from "@/utils/supabase/server";
-
 import {
   Card,
   CardBody,
   CardHeader,
   Progress,
+  Button,
 } from "@nextui-org/react";
 import { redirect } from "next/navigation";
 
@@ -13,33 +14,70 @@ export default async function Dashboard() {
   const supabase = createClient();
   const { data, error } = await supabase.auth.getUser();
   if (error || !data?.user) {
-    redirect("/login");
+    redirect("/sign-in");
   }
+
   const { data: personalAccount } = await supabase.rpc("get_personal_account");
-  console.log(personalAccount);
+  const { data: subscriptionData } = await supabase.functions.invoke(
+    "billing-functions",
+    {
+      body: {
+        action: "get_billing_status",
+        args: {
+          account_id: personalAccount.account_id,
+        },
+      },
+    }
+  );
+
+  const credits = personalAccount.private_metadata.credits ?? 100;
+  const subscriptionActive = subscriptionData?.subscription_active;
+
   return (
-    <>
+    <div className="container mx-auto p-6 space-y-6">
       <Card>
-        <CardHeader>
-          <h2>API Key</h2>
+        <CardHeader className="flex justify-between items-center">
+          <h2 className="text-xl font-semibold">API Key</h2>
         </CardHeader>
-        <CardBody>
+        <CardBody className="bg-gray-50">
           <LabelWithCopy text={personalAccount.private_metadata.api_key} />
         </CardBody>
       </Card>
       <Card>
-        <CardHeader>
-          <div>
-            <h2>API Credits</h2>
-          </div>
-          <div>
-            <p>0 of 100 - 0% of quota used</p>
-          </div>
+        <CardHeader className="flex justify-between items-center">
+          <h2 className="text-xl font-semibold">API Credits</h2>
         </CardHeader>
-        <CardBody>
-          <Progress aria-label="API Credits" value={60} className="max-w-md" />
+        <CardBody className="bg-gray-50">
+          <p>You have {credits} credits remaining</p>
+          <Progress
+            aria-label="API Credits"
+            value={credits}
+            className="max-w-md"
+            showValueLabel={true}
+            formatOptions={{}}
+            maxValue={100} // Assuming 100 is the max for free trial
+          />
+          {subscriptionActive ? (
+            <>
+              <p className="text-green-600">You have a subscription</p>
+              <ManageBillingButton accountId={personalAccount.account_id} />
+            </>
+          ) : (
+            <div className="mt-4">
+              <p className="text-red-600">You don't have a subscription</p>
+              <Button
+                onClick={() => {
+                  // Add logic to redirect to the subscription page
+                  redirect("/subscribe");
+                }}
+                className="mt-2"
+              >
+                Start a Plan / Free Trial
+              </Button>
+            </div>
+          )}
         </CardBody>
       </Card>
-    </>
+    </div>
   );
 }

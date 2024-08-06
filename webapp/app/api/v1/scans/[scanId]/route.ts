@@ -24,7 +24,7 @@ type GetScanByIdResult = {
 
 export async function GET(
   request: NextRequest,
-  { params }: GetScanByIdRequest,
+  { params }: GetScanByIdRequest
 ): Promise<NextResponse<HttpResponse | GetScanByIdResult>> {
   const accountId = getAccountId(request);
   if (isError(accountId)) {
