@@ -21,7 +21,13 @@ export const NavbarComponent = () => {
   const menuItems: string[] = ["Pricing"];
 
   return (
-    <Navbar isBordered variant="sticky" className="bg-white shadow-md">
+    <Navbar
+      isBordered
+      position="sticky"
+      className="bg-white shadow-md"
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+    >
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -66,15 +72,13 @@ export const NavbarComponent = () => {
             </SignedIn>
             <SignedOut>
               <Link href="/sign-in">
-                <Button auto flat>
-                  Sign In
-                </Button>
+                <Button>Sign In</Button>
               </Link>
             </SignedOut>
           </BasejumpUserSession>
         </NavbarItem>
       </NavbarContent>
-      <NavbarMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)}>
+      <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link

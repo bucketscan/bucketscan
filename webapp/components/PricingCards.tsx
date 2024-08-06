@@ -10,7 +10,7 @@ import {
   Button,
 } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
-import { manageSubscription, startSubscription } from "@/app/pricing/page";
+import { manageSubscription, startSubscription } from "@/app/pricing/actions";
 
 const PricingCardsContent = ({
   plans,
