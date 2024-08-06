@@ -10,14 +10,16 @@ import {
   Button,
 } from "@nextui-org/react";
 import { useRouter } from "next/navigation";
-import { startSubscription } from "@/app/pricing/page";
+import { manageSubscription, startSubscription } from "@/app/pricing/page";
 
 const PricingCardsContent = ({
   plans,
   accountId,
+  subscriptionActive,
 }: {
   plans: any;
   accountId: string;
+  subscriptionActive: boolean;
 }) => {
   const router = useRouter();
   return (
@@ -40,14 +42,18 @@ const PricingCardsContent = ({
               £{price / 100} {currency.toUpperCase()}
               <Button
                 onClick={async () => {
-                  if (accountId) {
+                  if (subscriptionActive && accountId) {
+                    await manageSubscription(accountId);
+                  } else if (accountId) {
                     await startSubscription(accountId, id); // Call the server action
                   } else {
                     router.push("/sign-in");
                   }
                 }}
               >
-                Subscribe
+                {subscriptionActive && accountId
+                  ? "Manage Subscription"
+                  : "Subscribe"}
               </Button>
             </CardBody>
           </Card>
@@ -60,9 +66,11 @@ const PricingCardsContent = ({
 export const PricingCards = ({
   pricingPlans,
   accountId,
+  subscriptionActive,
 }: {
   pricingPlans: Array<any>;
   accountId: string;
+  subscriptionActive: boolean;
 }) => {
   const [selectedTab, setSelectedTab] = useState("monthly");
 
@@ -87,6 +95,7 @@ export const PricingCards = ({
                 <PricingCardsContent
                   plans={monthlyPlans}
                   accountId={accountId}
+                  subscriptionActive={subscriptionActive}
                 />
               )}
             </Tab>
@@ -95,6 +104,7 @@ export const PricingCards = ({
                 <PricingCardsContent
                   plans={yearlyPlans}
                   accountId={accountId}
+                  subscriptionActive={subscriptionActive}
                 />
               )}
             </Tab>

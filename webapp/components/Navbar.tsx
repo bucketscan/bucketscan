@@ -21,49 +21,60 @@ export const NavbarComponent = () => {
   const menuItems: string[] = ["Pricing"];
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen}>
+    <Navbar isBordered variant="sticky" className="bg-white shadow-md">
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
         <Link href="/">
-          <NavbarBrand>
+          <NavbarBrand className="flex items-center gap-2">
             <Image
               src="/logo.png"
-              width={50}
-              height={50}
+              width={40}
+              height={40}
               alt="Bucketscan Logo"
             />
-            <p className="font-bold text-inherit">Bucketscan</p>
+            <p className="font-bold text-xl text-blue-600">Bucketscan</p>
           </NavbarBrand>
         </Link>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="/pricing">
-            Pricing
-          </Link>
-        </NavbarItem>
+      <NavbarContent className="hidden sm:flex gap-6" justify="center">
+        {menuItems.map((item) => (
+          <NavbarItem key={item}>
+            <Link
+              color="primary"
+              href={`/${item.toLowerCase()}`}
+              className="text-lg"
+            >
+              {item}
+            </Link>
+          </NavbarItem>
+        ))}
       </NavbarContent>
-      <NavbarContent justify="end">
+      <NavbarContent justify="end" className="gap-4">
         <NavbarItem>
           <BasejumpUserSession>
             <SignedIn>
-              Hello! <br />
-              <p>
-                <Link href="/dashboard">Dashboard</Link>
-              </p>
-              <LogoutButton />
+              <div className="flex items-center gap-2">
+                <Link href="/dashboard" className="text-lg">
+                  Dashboard
+                </Link>
+                <LogoutButton />
+              </div>
             </SignedIn>
             <SignedOut>
-              <Link href="/sign-in">Sign In</Link>
+              <Link href="/sign-in">
+                <Button auto flat>
+                  Sign In
+                </Button>
+              </Link>
             </SignedOut>
           </BasejumpUserSession>
         </NavbarItem>
       </NavbarContent>
-      <NavbarMenu>
+      <NavbarMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)}>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
@@ -74,9 +85,8 @@ export const NavbarComponent = () => {
                   ? "danger"
                   : "foreground"
               }
-              className="w-full"
-              href="#"
-              size="lg"
+              className="w-full text-lg"
+              href={`/${item.toLowerCase()}`}
             >
               {item}
             </Link>

@@ -8,7 +8,6 @@ import {
   Progress,
 } from "@nextui-org/react";
 import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
 
 export default async function Dashboard() {
   const supabase = createClient();
@@ -16,6 +15,7 @@ export default async function Dashboard() {
   if (error || !data?.user) {
     redirect("/sign-in");
   }
+
   const { data: personalAccount } = await supabase.rpc("get_personal_account");
   const { data: subscriptionData } = await supabase.functions.invoke(
     "billing-functions",
@@ -28,7 +28,10 @@ export default async function Dashboard() {
       },
     }
   );
-  console.log(subscriptionData);
+
+  const credits = personalAccount.private_metadata.credits ?? 100;
+  const subscriptionActive = subscriptionData?.subscription_active;
+
   return (
     <div className="container mx-auto p-6 space-y-6">
       <Card>
@@ -44,25 +47,33 @@ export default async function Dashboard() {
           <h2 className="text-xl font-semibold">API Credits</h2>
         </CardHeader>
         <CardBody className="bg-gray-50">
-          {subscriptionData && subscriptionData.subscription_active ? (
-            <div className="space-y-4">
+          <p>You have {credits} credits remaining</p>
+          <Progress
+            aria-label="API Credits"
+            value={credits}
+            className="max-w-md"
+            showValueLabel={true}
+            formatOptions={{}}
+            maxValue={100} // Assuming 100 is the max for free trial
+          />
+          {subscriptionActive ? (
+            <>
               <p className="text-green-600">You have a subscription</p>
-              <p>
-                You have {personalAccount.private_metadata.credits} credits
-                remaining
-              </p>
-              <Progress
-                aria-label="API Credits"
-                value={personalAccount.private_metadata.credits}
-                className="max-w-md"
-                showValueLabel={true}
-                formatOptions={{}}
-                // maxValue={} // TODO: Add this with the max allowed for the plan
-              />
               <ManageBillingButton accountId={personalAccount.account_id} />
-            </div>
+            </>
           ) : (
-            <p className="text-red-600">You don't have a subscription</p>
+            <div className="mt-4">
+              <p className="text-red-600">You don't have a subscription</p>
+              <Button
+                onClick={() => {
+                  // Add logic to redirect to the subscription page
+                  redirect("/subscribe");
+                }}
+                className="mt-2"
+              >
+                Start a Plan / Free Trial
+              </Button>
+            </div>
           )}
         </CardBody>
       </Card>

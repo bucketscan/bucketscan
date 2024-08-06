@@ -49,13 +49,28 @@ export default async function Pricing() {
           account_id: personalAccount?.account_id ?? null,
         },
       },
-    },
+    }
   );
+
+  const { data: subscriptionData } = await supabase.functions.invoke(
+    "billing-functions",
+    {
+      body: {
+        action: "get_billing_status",
+        args: {
+          account_id: personalAccount.account_id,
+        },
+      },
+    }
+  );
+
+  const subscriptionActive: boolean = subscriptionData?.subscription_active;
 
   return (
     <PricingCards
       pricingPlans={pricingPlans || []}
       accountId={personalAccount?.account_id || null}
+      subscriptionActive={subscriptionActive}
     />
   );
 }
