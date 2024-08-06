@@ -14,7 +14,7 @@ export default async function Dashboard() {
   const supabase = createClient();
   const { data, error } = await supabase.auth.getUser();
   if (error || !data?.user) {
-    redirect("/login");
+    redirect("/sign-in");
   }
   const { data: personalAccount } = await supabase.rpc("get_personal_account");
   const { data: subscriptionData } = await supabase.functions.invoke(
@@ -26,7 +26,7 @@ export default async function Dashboard() {
           account_id: personalAccount.account_id,
         },
       },
-    },
+    }
   );
   console.log(subscriptionData);
   return (

@@ -27,10 +27,17 @@ export const NavbarComponent = () => {
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
-        <NavbarBrand>
-          <Image src="/logo.png" width={50} height={50} alt="Bucketscan Logo" />
-          <p className="font-bold text-inherit">Bucketscan</p>
-        </NavbarBrand>
+        <Link href="/">
+          <NavbarBrand>
+            <Image
+              src="/logo.png"
+              width={50}
+              height={50}
+              alt="Bucketscan Logo"
+            />
+            <p className="font-bold text-inherit">Bucketscan</p>
+          </NavbarBrand>
+        </Link>
       </NavbarContent>
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
@@ -51,7 +58,7 @@ export const NavbarComponent = () => {
               <LogoutButton />
             </SignedIn>
             <SignedOut>
-              <Link href="/login">Login</Link>
+              <Link href="/sign-in">Sign In</Link>
             </SignedOut>
           </BasejumpUserSession>
         </NavbarItem>

@@ -10,7 +10,7 @@ const LogoutButton = () => {
     // Call the API route to clear cookies
     const response = await fetch("/api/logout", { method: "POST" });
     if (response.ok) {
-      redirect("/login"); // Redirect to the login page or any other page
+      redirect("/sign-in"); // Redirect to the login page or any other page
     } else {
       console.error("Failed to log out on the server side");
     }

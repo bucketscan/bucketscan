@@ -19,7 +19,7 @@ export default async function UserAccountButton() {
   const cookieStore = cookies();
   const supabaseClient = createClient();
   const { data: personalAccount } = await supabaseClient.rpc(
-    "get_personal_account",
+    "get_personal_account"
   );
 
   const signOut = async () => {
@@ -28,7 +28,7 @@ export default async function UserAccountButton() {
     const cookieStore = cookies();
     const supabase = createClient();
     await supabase.auth.signOut();
-    return redirect("/login");
+    return redirect("/sign-in");
   };
 
   return (

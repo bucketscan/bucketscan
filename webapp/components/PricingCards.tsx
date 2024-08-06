@@ -41,7 +41,7 @@ const PricingCardsContent = ({
                 if (accountId) {
                   await startSubscription(accountId, id); // Call the server action
                 } else {
-                  redirect("/login");
+                  redirect("/sign-in");
                 }
               }}
             >
