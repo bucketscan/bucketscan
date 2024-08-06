@@ -9,7 +9,7 @@ import {
   Tab,
   Button,
 } from "@nextui-org/react";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { startSubscription } from "@/app/pricing/page";
 
 const PricingCardsContent = ({
@@ -18,41 +18,44 @@ const PricingCardsContent = ({
 }: {
   plans: any;
   accountId: string;
-}) => (
-  <>
-    {plans.map(
-      ({
-        currency,
-        id,
-        price,
-        product_name,
-      }: {
-        currency: string;
-        id: any;
-        price: number;
-        product_name: string;
-      }) => (
-        <Card key={id}>
-          <CardHeader>{product_name}</CardHeader>
-          <CardBody>
-            £{price / 100} {currency.toUpperCase()}
-            <Button
-              onClick={async () => {
-                if (accountId) {
-                  await startSubscription(accountId, id); // Call the server action
-                } else {
-                  redirect("/sign-in");
-                }
-              }}
-            >
-              Subscribe
-            </Button>
-          </CardBody>
-        </Card>
-      )
-    )}
-  </>
-);
+}) => {
+  const router = useRouter();
+  return (
+    <>
+      {plans.map(
+        ({
+          currency,
+          id,
+          price,
+          product_name,
+        }: {
+          currency: string;
+          id: any;
+          price: number;
+          product_name: string;
+        }) => (
+          <Card key={id}>
+            <CardHeader>{product_name}</CardHeader>
+            <CardBody>
+              £{price / 100} {currency.toUpperCase()}
+              <Button
+                onClick={async () => {
+                  if (accountId) {
+                    await startSubscription(accountId, id); // Call the server action
+                  } else {
+                    router.push("/sign-in");
+                  }
+                }}
+              >
+                Subscribe
+              </Button>
+            </CardBody>
+          </Card>
+        )
+      )}
+    </>
+  );
+};
 
 export const PricingCards = ({
   pricingPlans,

@@ -1,14 +1,14 @@
 import { ManageBillingButton } from "@/components/ManageBillingButton";
 import { LabelWithCopy } from "@/components/label-with-copy";
 import { createClient } from "@/utils/supabase/server";
-
 import {
   Card,
   CardBody,
   CardHeader,
   Progress,
 } from "@nextui-org/react";
-import { redirect, useSearchParams } from "next/navigation";
+import { redirect } from "next/navigation";
+import { useEffect, useState } from "react";
 
 export default async function Dashboard() {
   const supabase = createClient();
@@ -30,23 +30,23 @@ export default async function Dashboard() {
   );
   console.log(subscriptionData);
   return (
-    <>
+    <div className="container mx-auto p-6 space-y-6">
       <Card>
-        <CardHeader>
-          <h2>API Key</h2>
+        <CardHeader className="flex justify-between items-center">
+          <h2 className="text-xl font-semibold">API Key</h2>
         </CardHeader>
-        <CardBody>
+        <CardBody className="bg-gray-50">
           <LabelWithCopy text={personalAccount.private_metadata.api_key} />
         </CardBody>
       </Card>
       <Card>
-        <CardHeader>
-          <h2>API Credits</h2>
+        <CardHeader className="flex justify-between items-center">
+          <h2 className="text-xl font-semibold">API Credits</h2>
         </CardHeader>
-        <CardBody>
+        <CardBody className="bg-gray-50">
           {subscriptionData && subscriptionData.subscription_active ? (
-            <>
-              <p>You have a subscription</p>
+            <div className="space-y-4">
+              <p className="text-green-600">You have a subscription</p>
               <p>
                 You have {personalAccount.private_metadata.credits} credits
                 remaining
@@ -60,12 +60,12 @@ export default async function Dashboard() {
                 // maxValue={} // TODO: Add this with the max allowed for the plan
               />
               <ManageBillingButton accountId={personalAccount.account_id} />
-            </>
+            </div>
           ) : (
-            <p>You don't have a subscription</p>
+            <p className="text-red-600">You don't have a subscription</p>
           )}
         </CardBody>
       </Card>
-    </>
+    </div>
   );
 }
