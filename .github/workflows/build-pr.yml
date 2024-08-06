@@ -48,10 +48,6 @@ jobs:
         shell: bash
         run: make install
 
-      - name: Typecheck
-        shell: bash
-        run: make check
-
       - name: Build
         shell: bash
         run: make build

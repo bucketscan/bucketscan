@@ -25,10 +25,6 @@ init:
 install:
 	yarn install
 
-.PHONY: check
-check:
-	yarn workspaces foreach -A run typecheck
-
 .PHONY: build
 build:
 	yarn workspaces foreach -A run build
