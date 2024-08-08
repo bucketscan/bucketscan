@@ -1,4 +1,5 @@
 import { ManageBillingButton } from "@/components/ManageBillingButton";
+import { SubscribeToPlanButton } from "@/components/SubscribeToPlanButton";
 import { LabelWithCopy } from "@/components/label-with-copy";
 import { createClient } from "@/utils/supabase/server";
 import {
@@ -65,15 +66,7 @@ export default async function Dashboard() {
           ) : (
             <div className="mt-4">
               <p className="text-red-600">You don't have a subscription</p>
-              <Button
-                onClick={() => {
-                  // Add logic to redirect to the subscription page
-                  redirect("/subscribe");
-                }}
-                className="mt-2"
-              >
-                Start a Plan / Free Trial
-              </Button>
+              <SubscribeToPlanButton accountId={personalAccount.account_id} />
             </div>
           )}
         </CardBody>
