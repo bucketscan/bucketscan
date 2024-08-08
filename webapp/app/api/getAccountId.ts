@@ -3,7 +3,7 @@ import { Result } from "@bucketscan/utils";
 import { badRequest } from "./responses";
 import { createClient } from "@/utils/supabase/server";
 
-export default async (request: NextRequest): Promise<string | Error> => {
+export default async (request: NextRequest): Promise<string> => {
   const apiKey = request.headers.get("X-Api-Key");
 
   if (!apiKey) {

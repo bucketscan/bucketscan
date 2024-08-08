@@ -38,7 +38,6 @@ export async function POST(
     accountId,
     fileReference
   );
-  debugger;
   if (isError(trackPendingScanResult)) {
     return internalServerError(
       "Failed to start the scan: " + trackPendingScanResult.message

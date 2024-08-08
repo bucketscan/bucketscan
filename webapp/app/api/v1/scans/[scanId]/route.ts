@@ -1,15 +1,14 @@
-import { NextRequest, NextResponse } from "next/server"
-import { isError } from "@bucketscan/utils"
-import { ScanResult } from "@bucketscan/supabase"
+import { NextRequest, NextResponse } from "next/server";
+import { isError, HttpResponse } from "@bucketscan/utils";
+import { ScanResult } from "@bucketscan/supabase";
 import {
   badRequest,
-  HttpResponse,
   internalServerError,
   notFound,
-  ok
-} from "@/app/api/responses"
-import getAccountId from "@/app/api/getAccountId"
-import { supabaseClient } from "@/app/api/supabaseClient"
+  ok,
+} from "@/app/api/responses";
+import getAccountId from "@/app/api/getAccountId";
+import { supabaseClient } from "@/app/api/supabaseClient";
 
 type GetScanByIdRequest = {
   params: {
