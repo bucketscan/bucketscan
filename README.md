@@ -27,6 +27,12 @@ $ make setup
 $ make start
 ```
 
+Note that these commands wrap the use of [Yarn Workspaces](https://classic.yarnpkg.com/lang/en/docs/workspaces/). This means that all interactions with each "workspace" is now done anywhere in the project. So long as you run `yarn install` initially at the root, that will wire up the use of workspaces. You can then interact with a single workspace using the command `yarn workspace <workspace-name> <command-name>` or all workspaces with something like `yarn workspaces foreach -A <command-name>`.
+
+To see a list of all available workspaces, run `yarn workspaces list`. These workspace commands can be run from anywhere in the repository.
+
+Using Yarn Workspaces enables us to share code between workspaces. For example, we have some shared packages under the [`@bucketscan/`](@bucketscan/) folder. These shared libraries can be referenced from other workspaces simply using their workspace name (see the `name` property within the `package.json` files).
+
 ## Cleanup
 
 To clean up all build outputs, run the following command in the terminal:
@@ -35,32 +41,4 @@ To clean up all build outputs, run the following command in the terminal:
 $ make teardown
 ```
 
-## Working with Supabase
-
-<!-- TODO: This step needs updating. We also need to consider how we are going to handle migrations. -->
-
-To create a new migration run
-
-```shell
-$ cd packages/web # change into the web package
-$ npx supabase migration new <NAME>
-```
-
-Afterward, create your migration in a transaction. When happy, you can apply it to the local DB with `npx supabase migration up`. Finally, when you're ready to push that change to prod, run `npx supabase db push`.
-
-To create migrations please see this [documentation](https://supabase.com/docs/guides/cli/local-development#database-migrations)
-
-## Concepts
-
-### Hierarchy
-There is a heirarchy of various concepts that have implications on the business logic of the system.
-
-1. Teams - created automatically on login. Controls billing and access to the account.
-2. API keys - Teams can have multiple API keys. These are used to authenticate with the system. They can have names and be rotated.
-2. Users - created automatically on login. Can be invited to join a team and can be part of multiple teams.
-3. Files - the files that are uploaded to the system. Automatically triggers at least 1 scan.
-4. Scans - files can have multiple scans. Each scan has a status and a result.
-
-Other notes: We will likely want the concept of a sandbox environment. This is where customers can integrate and we will just pass the file through the system, or deliberately fail it. In this way, API keys are assigned a livemode, true or false to determine this fact.
-
-**Initially however, we will just focus on creating users (who will be automatically assigned a team in the background).**
+TODO: Make a note about migrations with Supabase.

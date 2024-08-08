@@ -1,69 +1,79 @@
-"use client"
-
-import React from "react";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Link, Button, NavbarMenuToggle, NavbarMenuItem, NavbarMenu} from "@nextui-org/react";
+import Image from "next/image";
 import { BasejumpUserSession, SignedIn, SignedOut } from "@usebasejump/next";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+  Link,
+  Button,
+} from "@nextui-org/react";
+import React from "react";
+import LogoutButton from "./Logout";
 
-export default function Menu() {
+export const NavbarComponent = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
-  ];
+  // Only appear until the mobile menu
+  const menuItems: string[] = ["Pricing"];
 
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen}>
+    <Navbar
+      isBordered
+      position="sticky"
+      className="bg-white shadow-md"
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+    >
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
           className="sm:hidden"
         />
         <Link href="/">
-          <NavbarBrand>
-            <p className="font-bold text-inherit">BucketScan</p>
+          <NavbarBrand className="flex items-center gap-2">
+            <Image
+              src="/logo.png"
+              width={40}
+              height={40}
+              alt="Bucketscan Logo"
+            />
+            <p className="font-bold text-xl text-blue-600">Bucketscan</p>
           </NavbarBrand>
         </Link>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link href="#" aria-current="page">
-            Customers
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
-          </Link>
-        </NavbarItem>
+      <NavbarContent className="hidden sm:flex gap-6" justify="center">
+        {menuItems.map((item) => (
+          <NavbarItem key={item}>
+            <Link
+              color="primary"
+              href={`/${item.toLowerCase()}`}
+              className="text-lg"
+            >
+              {item}
+            </Link>
+          </NavbarItem>
+        ))}
       </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
+      <NavbarContent justify="end" className="gap-4">
+        <NavbarItem>
           <BasejumpUserSession>
             <SignedIn>
-              <p>Hello X,</p>
-              <form action="/auth/signout" method="post">
-                <Button className="button block" type="submit">
-                  Sign out
-                </Button>
-              </form>
+              <div className="flex items-center gap-2">
+                <Link href="/dashboard" className="text-lg">
+                  Dashboard
+                </Link>
+                <LogoutButton />
+              </div>
             </SignedIn>
             <SignedOut>
-              <Link href="/login">Login</Link>
+              <Link href="/sign-in">
+                <Button>Sign In</Button>
+              </Link>
             </SignedOut>
           </BasejumpUserSession>
         </NavbarItem>
@@ -73,11 +83,14 @@ export default function Menu() {
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
               color={
-                index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
+                index === 2
+                  ? "primary"
+                  : index === menuItems.length - 1
+                  ? "danger"
+                  : "foreground"
               }
-              className="w-full"
-              href="#"
-              size="lg"
+              className="w-full text-lg"
+              href={`/${item.toLowerCase()}`}
             >
               {item}
             </Link>
@@ -86,4 +99,4 @@ export default function Menu() {
       </NavbarMenu>
     </Navbar>
   );
-}
+};

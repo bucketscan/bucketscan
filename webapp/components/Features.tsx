@@ -1,19 +1,19 @@
-import { memo, ReactNode } from "react"
+import { memo, ReactNode } from "react";
 import {
   ShieldCheckIcon,
   CodeBracketIcon,
   BellAlertIcon,
-} from "@heroicons/react/24/outline"
-import Section from "@/components/pages/home/Section"
+} from "@heroicons/react/24/outline";
+import Section from "@/components/pages/home/Section";
 
 const Feature = ({
   title,
   description,
   icon,
 }: {
-  title: string
-  description: string
-  icon: ReactNode
+  title: string;
+  description: string;
+  icon: ReactNode;
 }) => (
   <div key={title}>
     <dt className="flex items-center justify-center align-middle text-base font-semibold leading-7 text-white">
@@ -39,8 +39,7 @@ const Features = () => (
           Integrate with our simple cloud-based antivirus solution
         </h2>
         <h3 className="mt-6 text-lg leading-8 text-gray-300">
-          We have all the features (and more) you need to secure your
-          platform.
+          We have all the features (and more) you need to secure your platform.
         </h3>
       </header>
       <div className="mx-auto mt-16">
@@ -79,6 +78,6 @@ const Features = () => (
       </div>
     </div>
   </Section>
-)
+);
 
-export default memo(Features)
+export default memo(Features);
