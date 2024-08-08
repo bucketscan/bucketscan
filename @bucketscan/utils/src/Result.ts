@@ -1,7 +1,19 @@
-export type Result<T> = Error | T
+export type Result<T> = Error | T;
 
-export const isError = <T>(result: Result<T>): result is Error => {
-  const error = result as Error
+export type HttpResponse = {
+  apiVersion: string;
+  status: number;
+  message: string;
+  data?: any;
+};
 
-  return !!error && !!error.stack && !!error.message
-}
+export const isError = (result: any): result is HttpResponse | Error => {
+  const isHttpResponse =
+    typeof result.apiVersion === "string" &&
+    typeof result.status === "number" &&
+    typeof result.message === "string";
+
+  const isErrorObject = result instanceof Error;
+
+  return isHttpResponse || isErrorObject;
+};
